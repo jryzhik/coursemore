@@ -106,3 +106,8 @@ recordRoutes.route("/instructors").get(function (req, res) {
      res.json(result);
    });
 });
+
+//This is to test if postman woks
+app.get('/test', (req, res) => {
+  res.send('Hello from Express!');
+});
