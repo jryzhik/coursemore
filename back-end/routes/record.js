@@ -108,6 +108,6 @@ recordRoutes.route("/instructors").get(function (req, res) {
 });
 
 //This is to test if postman woks
-app.get('/test', (req, res) => {
+recordRoutes.route("/test").get(function (req, res) {
   res.send('Hello from Express!');
 });
