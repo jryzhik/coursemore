@@ -16,6 +16,11 @@ app.use(express.json());
 const usersRouter = require('./routes/users');
 
 //All routers (middleware) will be placed here
+
+app.get('/', function (req, res) {
+    res.send('hello');
+})
+
 app.use('/users', usersRouter)
 
 app.listen(port, () => {
