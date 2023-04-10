@@ -12,9 +12,9 @@ const dbo = require("../db/conn");
 const ObjectId = require("mongodb").ObjectId;
 
 
-// This is to get all the courses from the coursemoreDB
-coursesRoutes.route("/courses").get(function (req, res) {
- let db_connect = dbo.getDb("coursemoreDB");
+//This is to get all the courses from the coursemoreDB
+coursesRoutes.route("/").get(function (req, res) {
+ let db_connect = dbo.getDb("coursemore");
  db_connect
    .collection("Courses")
    .find({})
@@ -24,9 +24,24 @@ coursesRoutes.route("/courses").get(function (req, res) {
    });
 });
 
+coursesRoutes.route("/add").post(function (req, response) {
+ let db_connect = dbo.getDb("coursemore");
+ let myobj = {
+   CRN: req.body.CRN,
+   CourseTitle: req.body.CourseTitle,
+   InstructorName: req.body.InstructorName,
+   CourseDescription: req.body.CourseDescription,
+   Seats: req.body.Seats
+ };
+ db_connect.collection("Courses").insertOne(myobj, function (err, res) {
+   if (err) throw err;
+   response.json(myobj);
+ });
+});
+
 // This is to get all the Instructors from the coursemoreDB
 coursesRoutes.route("/instructors").get(function (req, res) {
- let db_connect = dbo.getDb("coursemoreDB");
+ let db_connect = dbo.getDb("coursemore");
  db_connect
    .collection("Instructors")
    .find({})
