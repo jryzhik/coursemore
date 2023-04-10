@@ -81,7 +81,6 @@ recordRoutes.route("/:id").delete((req, response) => {
  });
 });
  
-module.exports = recordRoutes;
 
 // This is to get all the courses from the coursemoreDB
 recordRoutes.route("/courses").get(function (req, res) {
@@ -111,3 +110,7 @@ recordRoutes.route("/instructors").get(function (req, res) {
 recordRoutes.route("/test").get(function (req, res) {
   res.send('Hello from Express!');
 });
+
+
+
+module.exports = recordRoutes;

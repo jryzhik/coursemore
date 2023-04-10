@@ -14,14 +14,23 @@ app.use(express.json());
 
 
 const usersRouter = require('./routes/users');
-
+const recordRouter = require('./routes/record');
+const coursesRouter = require('./routes/courses');
 //All routers (middleware) will be placed here
 
 app.get('/', function (req, res) {
     res.send('hello');
 })
 
-app.use('/users', usersRouter)
+app.get('/hello', function (req, res) {
+    res.send('welcome to coursemore');
+})
+
+app.use("/test" , recordRouter);
+
+app.use('/users', usersRouter);
+
+app.use("/courses" , coursesRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
