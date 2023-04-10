@@ -66,6 +66,17 @@ coursesRoutes.route("/instructors/add").post(function (req, response) {
  });
 });
 
+// this is to delete a course in the database
+coursesRoutes.route("/delete").delete((req, response) => {
+ let db_connect = dbo.getDb();
+ let myquery = { CRN: req.body.CRN};
+ db_connect.collection("Courses").deleteOne(myquery, function (err, obj) {
+   if (err) throw err;
+   console.log("1 document deleted");
+   response.json(obj);
+ });
+});
+
 //This is to test if postman woks
 coursesRoutes.route("/test").get(function (req, res) {
   res.send('Hello from Express!');

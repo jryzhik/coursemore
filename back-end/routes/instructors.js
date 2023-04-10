@@ -38,6 +38,17 @@ instructorsRoutes.route("/add").post(function (req, response) {
  });
 });
 
+// this is to delete a Instructor in the database
+instructorsRoutes.route("/delete").delete((req, response) => {
+ let db_connect = dbo.getDb();
+ let myquery = { InstructorName: req.body.InstructorName}; // prbly give an ID to remove
+ db_connect.collection("Instructors").deleteOne(myquery, function (err, obj) {
+   if (err) throw err;
+   console.log("1 document deleted");
+   response.json(obj);
+ });
+});
+
 //This is to test if postman woks
 instructorsRoutes.route("/test").get(function (req, res) {
   res.send('Hello from Express!');
