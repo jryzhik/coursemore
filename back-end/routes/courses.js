@@ -32,7 +32,8 @@ coursesRoutes.route("/add").post(function (req, response) {
    CourseTitle: req.body.CourseTitle,
    InstructorName: req.body.InstructorName,
    CourseDescription: req.body.CourseDescription,
-   Seats: req.body.Seats
+   Seats: req.body.Seats,
+   Timing: req.body.Timing
  };
  db_connect.collection("Courses").insertOne(myobj, function (err, res) {
    if (err) throw err;

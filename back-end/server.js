@@ -17,6 +17,7 @@ const usersRouter = require('./routes/users');
 const recordRouter = require('./routes/record');
 const coursesRouter = require('./routes/courses');
 const instructorsRoutes = require('./routes/instructors');
+const scheduleRoutes = require('./routes/schedule');
 //All routers (middleware) will be placed here
 
 app.get('/', function (req, res) {
@@ -31,6 +32,7 @@ app.use("/test" , recordRouter);
 app.use('/users', usersRouter);
 app.use("/courses" , coursesRouter);
 app.use("/instructors" , instructorsRoutes);
+app.use("/schedule" , scheduleRoutes);
 
 
 app.listen(port, () => {
