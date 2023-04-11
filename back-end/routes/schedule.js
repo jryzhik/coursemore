@@ -13,7 +13,7 @@ const ObjectId = require("mongodb").ObjectId;
 
 
 //This is to test if postman woks
-recordRoutes.route("/test").get(function (req, res) {
+scheduleRoutes.route("/test").get(function (req, res) {
   res.send('Hello from Express!');
 });
 
