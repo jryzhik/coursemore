@@ -28,13 +28,19 @@ coursesRoutes.route("/").get(function (req, res) {
 coursesRoutes.route("/add").post(function (req, response) {
  let db_connect = dbo.getDb("coursemore");
  let myobj = {
-   CRN: req.body.CRN,
-   CourseTitle: req.body.CourseTitle,
+   CourseTitle: req.body.CourseName, // for the JSON object make the entity name exactly like the thing at end of req.body.
    InstructorName: req.body.InstructorName,
-   CourseDescription: req.body.CourseDescription,
-   Seats: req.body.Seats,
+   CRN: req.body.CRN,
+   CourseNumber: req.body.CourseNumber,
+   Section: req.body.Section,
+   Credits: req.body.Credits,
+   TimeText: req.body.TimeText,
+   HourStart: req.body.HourStart,
+   MinuteStart: req.body.MinuteStart,
+   HourEnd: req.body.HourEnd,
+   MinuteEnd: req.body.MinuteEnd,
    Days: req.body.Days,
-   Timing: req.body.Timing
+   Location: req.body.Location
  };
  db_connect.collection("Courses").insertOne(myobj, function (err, res) {
    if (err) throw err;
