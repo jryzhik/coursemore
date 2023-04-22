@@ -29,7 +29,7 @@ coursesRoutes.route("/add").post(function (req, response) {
  let db_connect = dbo.getDb("coursemore");
  let myobj = {
    CourseTitle: req.body.CourseName, // for the JSON object make the entity name exactly like the thing at end of req.body.
-   InstructorName: req.body.InstructorName,
+   InstructorName: req.body.CourseInstructor,
    CRN: req.body.CRN,
    CourseNumber: req.body.CourseNumber,
    Section: req.body.Section,
