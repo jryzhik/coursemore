@@ -12,9 +12,7 @@ percentEncodedPassword: GT%21ChristMercyGrace%3B%3B23
             pip3 install lxml
             pip3 install bs4
             pip3 install beautifulsoup4
-    
-
-
+            
 ### Run Server
     In the terminal (Back-end Repo)...
         node server.js
