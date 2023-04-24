@@ -81,4 +81,36 @@ recordRoutes.route("/:id").delete((req, response) => {
  });
 });
  
+
+// This is to get all the courses from the coursemoreDB
+recordRoutes.route("/courses").get(function (req, res) {
+ let db_connect = dbo.getDb("coursemoreDB");
+ db_connect
+   .collection("Courses")
+   .find({})
+   .toArray(function (err, result) {
+     if (err) throw err;
+     res.json(result);
+   });
+});
+
+// This is to get all the Instructors from the coursemoreDB
+recordRoutes.route("/instructors").get(function (req, res) {
+ let db_connect = dbo.getDb("coursemoreDB");
+ db_connect
+   .collection("Instructors")
+   .find({})
+   .toArray(function (err, result) {
+     if (err) throw err;
+     res.json(result);
+   });
+});
+
+//This is to test if postman woks
+recordRoutes.route("/test").get(function (req, res) {
+  res.send('Hello from Express!');
+});
+
+
+
 module.exports = recordRoutes;
