@@ -24,6 +24,20 @@ instructorsRoutes.route("/").get(function (req, res) {
    });
 });
 
+// This is see if an Instructor is in the Instructors collection
+instructorsRoutes.route("/instructor").get(function (req, res) {
+  let db_connect = dbo.getDb("coursemore");
+  instructor_passed = req.body.InstructorName
+  // instructor_passed = '"' + instructor_passed + '"' 
+  db_connect
+   .collection("Instructors")
+   .find({"InstructorName": instructor_passed})
+   .toArray(function (err, result) {
+     if (err) throw err;
+     res.json(result);
+   });
+});
+
 // This is to add an instructor into the database
 instructorsRoutes.route("/add").post(function (req, response) {
  let db_connect = dbo.getDb("coursemore");
