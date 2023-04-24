@@ -1,4 +1,6 @@
 import requests
+import json
+import time
 
 """NEED TO CALL MONGODB instructors and only get name"""
 course_size_weights = {
@@ -23,6 +25,8 @@ def average_gpa(list_GPA):
 
 
 """Used for accurate search of professors"""
+
+
 def reverse_name(name):
     name_to_list = name.split()
     reverse_name_string = ""
@@ -38,17 +42,36 @@ def reverse_name(name):
     return reverse_name_string
 
 
-"""Find the unique valueID of professor from course critique"""
-name_fromDB = 'William Robert Harris'
-name_fromDB = reverse_name(name_fromDB)
-course_critique_search = requests.get(
-    f"https://c4citk6s9k.execute-api.us-east-1.amazonaws.com/prod/elastic?q={name_fromDB}").json()
-professor_object = course_critique_search.get('searchresponse')[0]
-professor_name = professor_object['value']
-professor_uniqueID = professor_object['uniqueID']
+# Get all the courses from course collection
+all_courses = requests.get('http://localhost:5050/courses/')
+all_courses = all_courses.json()
+for course in all_courses:
+    """Find the unique valueID of professor from course critique"""
+    name_fromDB = course["InstructorName"]
+    if name_fromDB != 'TBA':
+        #See if instructor already exists
+        json_create_look = f'"InstructorName": "{name_fromDB}"'
+        json_create_look = '{' + json_create_look + '}'
+        json_initialize_look = json.loads(json_create_look)
+        res = requests.get('http://localhost:5050/instructors/instructor', json=json_initialize_look)
+        if res.json() == []:
+            name_fromDB_reversed = reverse_name(name_fromDB)
+            course_critique_search = requests.get(
+                f"https://c4citk6s9k.execute-api.us-east-1.amazonaws.com/prod/elastic?q={name_fromDB_reversed}").json()
+            professor_object = course_critique_search.get('searchresponse')[0]
+            professor_name = professor_object['value']
+            professor_uniqueID = professor_object['uniqueID']
+            """Use the uniqueID and find GPA"""
+            professor_report = requests.get(
+                f"https://c4citk6s9k.execute-api.us-east-1.amazonaws.com/prod/data/prof?profID={professor_uniqueID}&by=section").json()
+            professor_data_raw = professor_report.get('raw')
+            if professor_data_raw != []:
+                final_average_gpa = average_gpa(professor_data_raw)
 
-"""Use the uniqueID and find GPA"""
-professor_report = requests.get(
-    f"https://c4citk6s9k.execute-api.us-east-1.amazonaws.com/prod/data/prof?profID={professor_uniqueID}&by=section").json()
-professor_data_raw = professor_report.get('raw')
-print(average_gpa(professor_data_raw))
+                #Add instructor to Instructor Collection in MongoDB
+                json_create = f'"InstructorName": "{name_fromDB}", "GPA": "{final_average_gpa}"'
+                json_create = '{' + json_create + '}'
+                json_initialize = json.loads(json_create)
+                res = requests.post('http://localhost:5050/instructors/add', json=json_initialize)
+                time.sleep(0.200)
+
