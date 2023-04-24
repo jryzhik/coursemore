@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
-
+import requests
+import json
 
 # def custom_join(elements):
 #     output_string = ""
@@ -40,7 +41,7 @@ with open('../html/oscarExport.html', 'r') as html_file:
         # Remove all courses that have varied amount of credits
         if creditContained.__contains__('TO'):
             # Need to skip course and go to next one.
-            print("Skipped #", m, ": ", courseName)
+            # print("Skipped #", m, ": ", courseName)
             m = m + 1
         else:
             courseCredits = creditContained.__getitem__(len(creditContained) - 1)
@@ -66,19 +67,24 @@ with open('../html/oscarExport.html', 'r') as html_file:
             # courseInstructor = tableElements[6].a['target']
             # custom_join(tableElements[6].text.split())
             courseInstructor = 'TBA' if tableElements[6].text.split()[0] == 'TBA' else tableElements[6].a['target']
-            print(f'''Iteration: {z} Course Name : {courseName}
-            CRN: {courseCRN}
-            Course Number: CS {courseNumber}
-            Section: {courseSection}
-            Credits: {courseCredits}
-Ï            Time Text: {courseTime}
-            Hour Start: {hour_start}
-            Minute Start: {minute_start}
-            Hour End: {hour_end}
-            Minute End: {minute_end}
-            Days: {courseDays}
-            Location: {courseLocation}
-            ''' )
+#             print(f'''Iteration: {z} Course Name : {courseName}
+#             CRN: {courseCRN}
+#             Course Number: CS {courseNumber}
+#             Section: {courseSection}
+#             Credits: {courseCredits}
+# Ï            Time Text: {courseTime}
+#             Hour Start: {hour_start}
+#             Minute Start: {minute_start}
+#             Hour End: {hour_end}
+#             Minute End: {minute_end}
+#             Days: {courseDays}
+#             Location: {courseLocation}
+#             ''' )
+            json_create = f'"CourseName": "{courseName}", "CourseInstructor": "{courseInstructor}", "CRN": "{courseCRN}", "CourseNumber": "{courseNumber}", "Section": "{courseSection}", "Credits": "{courseCredits}", "TimeText": "{courseTime}", "HourStart": "{hour_start}", "MinuteStart": "{minute_start}", "HourEnd": "{hour_end}", "MinuteEnd": "{minute_end}", "Days": "{courseDays}", "Location": "{courseLocation}"'
+            json_create = '{' + json_create + '}'
+            json_initialize = json.loads(json_create)
+            res = requests.post('http://localhost:5050/courses/add', json=json_initialize)
+
             z = (z + 1)
 
 
