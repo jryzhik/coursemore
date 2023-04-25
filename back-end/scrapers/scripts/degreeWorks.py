@@ -1,6 +1,13 @@
 from bs4 import BeautifulSoup
+import sys
 
-with open('back-end/scrapers/html/degreeWorks.html', 'r') as html_file:
+# print('#Hello from python#')
+# print('File name: ' + sys.argv[1] + '#')
+file_name = sys.argv[1]
+file_path = 'uploads/' + file_name
+# print("file path", file_path)
+
+with open(file_path, 'r') as html_file:
     content = html_file.read()
 
     soup = BeautifulSoup(content, 'lxml')
