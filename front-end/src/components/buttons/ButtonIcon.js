@@ -25,7 +25,7 @@ export default function ButtonIcon(props) {
               height: 30,
             }}
             alt="icon"
-            src={FilterIcon}
+            src={ArrowUp}
           />
          <Typography variant='h3'>{props.text}</Typography>
     </button>
