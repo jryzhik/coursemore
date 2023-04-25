@@ -63,7 +63,7 @@ function Filter() {
 
         <FilterButton/>
 
-        <Grid padding={3} align={"center"}>
+        <Grid>
           <Footer />
         </Grid>
 
