@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const fs = require('fs');
 const md5 = require('md5')
-
+const {spawn} = require('child_process');
 
 // uploadRouter is an instance of the express router.
 const uploadRouter = express.Router();
@@ -26,15 +26,45 @@ uploadRouter.post('/', (req, res) => {
       fs.unlinkSync('./uploads/'+tmpFilename);
     }
     fs.appendFileSync('./uploads/'+tmpFilename, buffer);
-    console.log('./uploads/'+tmpFilename)
     if (lastChunk) {
       const finalFilename = md5(Date.now()).substr(0, 6) + '.' + ext;
       fs.renameSync('./uploads/'+tmpFilename, './uploads/'+finalFilename);
-      console.log('./uploads/'+finalFilename)
-      res.json({finalFilename});
+
+        var dataToSend;
+        // spawn new child process to call the python script
+        const python = spawn('python', ['scrapers/scripts/degreeWorks.py', finalFilename]);
+        // collect data from script
+        python.stdout.on('data', function (data) {
+        console.log('Pipe data from python script ...');
+        dataToSend = data.toString();
+        });
+        // in close event we are sure that stream from child process is closed
+        python.on('close', (code) => {
+        console.log(`child process close all stdio with code ${code}`);
+        // send data to browser
+        res.send(dataToSend) });
     } else {
       res.json('ok');
     }
   });
+
+//   uploadRouter.get('/test', (req, res) => {
+ 
+//     var dataToSend;
+//     // spawn new child process to call the python script
+//     const python = spawn('python', ['scrapers/scripts/script1.py']);
+//     // collect data from script
+//     python.stdout.on('data', function (data) {
+//      console.log('Pipe data from python script ...');
+//      dataToSend = data.toString();
+//     });
+//     // in close event we are sure that stream from child process is closed
+//     python.on('close', (code) => {
+//     console.log(`child process close all stdio with code ${code}`);
+//     // send data to browser
+//     res.send(dataToSend)
+//     });
+    
+//    })
 
 module.exports = uploadRouter;
