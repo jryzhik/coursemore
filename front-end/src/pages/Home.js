@@ -1,5 +1,5 @@
 import React from 'react'
-import BrandButton from '../components/BrandButton'
+import BrandButton from '../components/buttons/BrandButton'
 import { ThemeProvider, Typography } from '@mui/material';
 import { MainTheme } from '../theme';
 import CssBaseline from "@mui/material/CssBaseline";
