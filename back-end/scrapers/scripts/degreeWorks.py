@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 
-with open('../html/degreeWorks.html', 'r') as html_file:
+with open('back-end/scrapers/html/degreeWorks.html', 'r') as html_file:
     content = html_file.read()
 
     soup = BeautifulSoup(content, 'lxml')

@@ -19,7 +19,7 @@ def military_time(time_period, time):
         return int(time)
 
 
-with open('../html/oscarExport.html', 'r') as html_file:
+with open('back-end/scrapers/html/oscarExport.html', 'r') as html_file:
     content = html_file.read()
 
     soup = BeautifulSoup(content, 'lxml')
