@@ -8,6 +8,7 @@ import Grid from '@mui/material/Grid';
 import Footer from '../components/Footer';
 import UserImage from '../img/user.svg'
 import FilterIcon from '../img/filter_icon.svg'
+import FilterButton from '../components/FilterButton';
 
 import { Box } from '@mui/system'
 import Divider from '@mui/material/Divider';
@@ -59,6 +60,8 @@ function Filter() {
             width: '14rem'
             }}/>
         </Grid>
+
+        <FilterButton/>
 
         <Grid padding={3} align={"center"}>
           <Footer />

@@ -1,0 +1,33 @@
+.filter_btn_unselected {
+    background-color: rgb(234, 170, 0, .3);
+    color: #EAAA00;
+    border-color: #EAAA00;  
+    border-width: 2px;  
+    border-style: solid;
+    border-radius: 5px;
+    width: fit-content;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: .7em;
+    padding-bottom: .5em;
+    transition-duration: 0.2s;
+
+}
+.filter_btn_unselected:hover {
+    background-color: rgb(234, 170, 0, .4);
+}
+
+.filter_btn_selected {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: #ffffff;  
+    color: #EAAA00;
+    border-width: 2px;  
+    border-style: solid;
+    border-radius: 5px;
+    width: fit-content;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: .7em;
+    padding-bottom: .5em;
+    transition-duration: 0.2s;
+}
