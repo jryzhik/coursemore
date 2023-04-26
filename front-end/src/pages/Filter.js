@@ -66,14 +66,43 @@ function Filter() {
             width: '14rem'
           }} />
         </Grid>
+        <Box
+          paddingLeft={22}
+          paddingRight={22}
+          paddingTop={7}
+          >
+          <Grid container spacing={2} justifyContent={'flex-start'}>
+            <Grid item xs={4} md={4}>
+              <FilterButton width='long' max_length='4' text='day block' />
+            </Grid>
+            <Grid item xs={4} md={4}>
+              <FilterButton width='default' max_length='2' text='max credits' />
+            </Grid>
+            <Grid item xs={4} md={4}>
+              <FilterButton width='default' max_length='2' text='min credits' />
+            </Grid>
+            <Grid item xs={4} md={5}>
+              <FilterButton width='long' max_length='4' text='mandatory course' />
+            </Grid>
+            <Grid item xs={4} md={4}>
+              <ButtonIcon comp={ArrowUp} text='professor GPA' />
+            </Grid>
+            <Grid item xs={4} md={4}>
+              <ButtonIcon comp={CrossBlock} text='tech square' />
+            </Grid>
+            <Grid item xs={4} md={6}>
+              <ButtonTime width='default' text='hour block' max_length='2' />
+            </Grid>
+          </Grid>
+        </Box>
 
-        <FilterButton width='long' max_length='4' text='day block' />
+        {/* <FilterButton width='long' max_length='4' text='day block' />
         <FilterButton width='default' max_length='2' text='max credits' />
         <FilterButton width='default' max_length='2' text='min credits' />
         <FilterButton width='long' max_length='4' text='mandatory course' />
-        <ButtonIcon comp={ArrowUp}text='professor GPA'/>
-        <ButtonIcon comp={CrossBlock} text='tech square'/>
-        <ButtonTime width='default' text='hour block' max_length='2'/>
+        <ButtonIcon comp={ArrowUp} text='professor GPA' />
+        <ButtonIcon comp={CrossBlock} text='tech square' />
+        <ButtonTime width='default' text='hour block' max_length='2' /> */}
 
 
 
