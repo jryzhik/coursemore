@@ -110,3 +110,36 @@
     text-align: center;
     padding-top: .2rem;
 }
+
+.ampm_unselected {
+    background-color: rgba(51, 51, 51, 0.4);
+    border-color: #EAAA00;  
+    color: #EAAA00;
+    border-width: 2px;  
+    border-style: solid;
+    border-radius: 2px;
+    transition-duration: .5s;
+    margin-bottom: .4rem;
+    margin-right: 1rem;
+    font-size: 1em;
+    font-family: 'Regime';
+    font-weight: 700;
+    text-align: center;
+    padding: .2rem;
+}
+.ampm_selected {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #ffffff;  
+    color: #EAAA00;
+    border-width: 2px;  
+    border-style: solid;
+    border-radius: 2px;
+    transition-duration: .5s;
+    margin-bottom: .4rem;
+    margin-right: 1rem;
+    font-size: 1em;
+    font-family: 'Regime';
+    font-weight: 700;
+    text-align: center;
+    padding: .2rem;
+}

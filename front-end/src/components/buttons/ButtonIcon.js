@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import "../../css/filter_button.css";
 import { Typography } from '@mui/material';
 import { Box } from '@mui/system'
-import ArrowUp from '../../img/arrow_up.svg'
+
+
 
 
 
@@ -19,13 +20,14 @@ export default function ButtonIcon(props) {
   return (
     <button className={'filter_btn_' + style} onClick={handleClick}>
         <Box
-            paddingLeft={1}
+            marginTop={.7}
+            paddingRight={3}
             component="img"
             sx={{
               height: 30,
             }}
             alt="icon"
-            src={ArrowUp}
+            src={props.comp}
           />
          <Typography variant='h3'>{props.text}</Typography>
     </button>

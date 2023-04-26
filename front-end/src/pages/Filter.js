@@ -13,6 +13,11 @@ import FilterButton from '../components/buttons/FilterButton';
 import { Box } from '@mui/system'
 import Divider from '@mui/material/Divider';
 import ButtonIcon from '../components/buttons/ButtonIcon';
+import ArrowUp from '../img/arrow_up.svg'
+import CrossBlock from '../img/cross_block.svg'
+import ButtonTime from '../components/buttons/ButtonTime';
+
+
 
 
 
@@ -62,11 +67,13 @@ function Filter() {
           }} />
         </Grid>
 
-        <FilterButton width='default' max_length='2' text='day block' />
+        <FilterButton width='long' max_length='4' text='day block' />
         <FilterButton width='default' max_length='2' text='max credits' />
         <FilterButton width='default' max_length='2' text='min credits' />
         <FilterButton width='long' max_length='4' text='mandatory course' />
-        <ButtonIcon image='/Users/jamesryzhkov/Library/CloudStorage/OneDrive-GeorgiaInstituteofTechnology/Georgia Tech/Spring 2023/CS4440/coursemore/front-end/src/img/arrow_up.svg'/>
+        <ButtonIcon comp={ArrowUp}text='professor GPA'/>
+        <ButtonIcon comp={CrossBlock} text='tech square'/>
+        <ButtonTime width='default' text='hour block' max_length='2'/>
 
 
 
