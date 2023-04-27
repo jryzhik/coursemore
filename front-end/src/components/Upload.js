@@ -8,7 +8,7 @@ import axios from "axios";
 
 const chunkSize = 10 * 1024;
 
-function Upload() {
+function Upload(props) {
 
   const [dropzoneActive, setDropzoneActive] = useState(false);
   const [files, setFiles] = useState([]);
@@ -54,6 +54,9 @@ function Upload() {
           file.finalFilename = response.data.finalFilename;
           setLastUploadedFileIndex(currentFileIndex);
           setCurrentChunkIndex(null);
+          var courses = response.data.trim().split(',')
+          console.log(courses)
+          props.handleCallBack(courses)
         } else {
           setCurrentChunkIndex(currentChunkIndex + 1);
         }

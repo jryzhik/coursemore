@@ -76,6 +76,10 @@ export const MainTheme = createTheme({
         },
         h5Thin: {
           fontWeight: 200,
+        },
+        h3: {
+          letterSpacing: -3,
+          fontSize: "3em"
         }
       }
       

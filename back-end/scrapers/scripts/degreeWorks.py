@@ -6,7 +6,7 @@ import sys
 file_name = sys.argv[1]
 file_path = 'uploads/' + file_name
 # print("file path", file_path)
-
+final_string = ''
 with open(file_path, 'r') as html_file:
     content = html_file.read()
 
@@ -33,4 +33,8 @@ with open(file_path, 'r') as html_file:
         requiredCourseNumbersOnly.append(course_number)
 
     for course in requiredCourseNumbersOnly:
-        print("CS ", course)
+        if final_string == '':
+            final_string = final_string + course
+        else:
+            final_string = final_string + ',' + course
+print(final_string.strip())

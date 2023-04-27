@@ -1,5 +1,5 @@
-import React from 'react'
-import BrandButton from '../components/BrandButton'
+import React, { useState } from 'react'
+import BrandButton from '../components/buttons/BrandButton'
 import { ThemeProvider, Typography } from '@mui/material';
 import { MainTheme } from '../theme';
 import CssBaseline from "@mui/material/CssBaseline";
@@ -8,8 +8,14 @@ import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import Upload from '../components/Upload';
 import Footer from '../components/Footer';
-
+import { useNavigate } from 'react-router-dom'
 function Home() {
+  const navigate = useNavigate();
+
+  function uploadCallBack(degreeWorksResult) {
+    navigate('/filter', {state: degreeWorksResult});
+  };
+
   return (
     <ThemeProvider theme={MainTheme}>
       <Header/>
@@ -32,7 +38,7 @@ function Home() {
           }}/>
     </Grid>
     <Grid marginLeft={15} marginRight={15} padding={3} align={"center"}>
-        <Upload/>
+        <Upload handleCallBack={uploadCallBack}/>
     </Grid>
     <Grid padding={3} align={"center"}>
         <Footer/>
