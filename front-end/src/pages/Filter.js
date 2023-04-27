@@ -17,20 +17,13 @@ import ArrowUp from '../img/arrow_up.svg'
 import CrossBlock from '../img/cross_block.svg'
 import ButtonTime from '../components/buttons/ButtonTime';
 import { useState } from 'react';
-
-
-// const state = {
-//   dayBlock: null,
-//   profGPA: null,
-//   hourBlock: [{start: null, end: null}],
-//   techSquare: null,
-//   minCredits: null,
-//   maxCredit: null,
-//   mandatoryCourse: null
-// }
-
+import { useLocation } from 'react-router-dom'
 
 function Filter() {
+  const location = useLocation()
+  const requiredCourses = location.state
+  console.log("passed down req courses", requiredCourses)
+
   const [inputFields, setInputFields] = useState(
     { dayBlock: null,
       profGPA: false,
@@ -38,7 +31,8 @@ function Filter() {
       techSquare: false,
       minCredits: null,
       maxCredits: null,
-      mandatoryCourse: null
+      mandatoryCourse: null,
+      degreeWorksCourses: requiredCourses
     }
   )
   
