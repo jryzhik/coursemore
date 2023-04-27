@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.instruction_inactive {
+  display: none;
+}
+.instruction_active {
+  position: absolute;
+  width: 40%;
+  padding: 3rem;
+  opacity: 0; /* start with zero opacity */
+  animation-name: fadeIn;
+  animation-duration: 1s;
+  animation-fill-mode: forwards; /* element stays at 100% opacity after animation */
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
