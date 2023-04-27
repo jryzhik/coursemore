@@ -16,13 +16,44 @@ import ButtonIcon from '../components/buttons/ButtonIcon';
 import ArrowUp from '../img/arrow_up.svg'
 import CrossBlock from '../img/cross_block.svg'
 import ButtonTime from '../components/buttons/ButtonTime';
+import { useState } from 'react';
 
 
-
-
+// const state = {
+//   dayBlock: null,
+//   profGPA: null,
+//   hourBlock: [{start: null, end: null}],
+//   techSquare: null,
+//   minCredits: null,
+//   maxCredit: null,
+//   mandatoryCourse: null
+// }
 
 
 function Filter() {
+  const [inputFields, setInputFields] = useState(
+    { dayBlock: null,
+      profGPA: false,
+      hourBlock: {start: null, end: null},
+      techSquare: false,
+      minCredits: null,
+      maxCredits: null,
+      mandatoryCourse: null
+    }
+  )
+  
+  function childCallBack(attribute, value) {
+    setInputFields(prevInputFields => ({ ...prevInputFields, [attribute]: value}))
+  }
+
+  function childCallBackTime(attribute, value) {
+    setInputFields(prevInputFields => ({ 
+      ...prevInputFields,
+      hourBlock: {...prevInputFields.hourBlock, [attribute]: value},
+    }))
+  }
+
+  console.log(inputFields)
   return (
     <ThemeProvider theme={MainTheme}>
       <Header />
@@ -73,29 +104,28 @@ function Filter() {
           >
           <Grid container spacing={2} justifyContent={'flex-start'}>
             <Grid item xs={4} md={4}>
-              <FilterButton width='long' max_length='4' text='day block' />
+              <FilterButton attribute='dayBlock' handleCallBack={childCallBack} width='long' max_length='4' text='day block' />
             </Grid>
             <Grid item xs={4} md={4}>
-              <FilterButton width='default' max_length='2' text='max credits' />
+              <FilterButton attribute='maxCredits' handleCallBack={childCallBack} width='default' max_length='2' text='max credits' />
             </Grid>
             <Grid item xs={4} md={4}>
-              <FilterButton width='default' max_length='2' text='min credits' />
+              <FilterButton attribute='minCredits' handleCallBack={childCallBack} width='default' max_length='2' text='min credits' />
             </Grid>
             <Grid item xs={4} md={5}>
-              <FilterButton width='long' max_length='4' text='mandatory course' />
+              <FilterButton attribute='mandatoryCourse' handleCallBack={childCallBack} width='long' max_length='4' text='mandatory course' />
             </Grid>
             <Grid item xs={4} md={4}>
-              <ButtonIcon comp={ArrowUp} text='professor GPA' />
+              <ButtonIcon attribute='profGPA' handleCallBack={childCallBack} comp={ArrowUp} text='professor GPA' />
             </Grid>
             <Grid item xs={4} md={4}>
-              <ButtonIcon comp={CrossBlock} text='tech square' />
+              <ButtonIcon attribute='techSquare' handleCallBack={childCallBack} comp={CrossBlock} text='tech square' />
             </Grid>
             <Grid item xs={4} md={6}>
-              <ButtonTime width='default' text='hour block' max_length='2' />
+              <ButtonTime handleCallBack={childCallBackTime} width='default' text='hour block' max_length='2' />
             </Grid>
           </Grid>
         </Box>
-
         {/* <FilterButton width='long' max_length='4' text='day block' />
         <FilterButton width='default' max_length='2' text='max credits' />
         <FilterButton width='default' max_length='2' text='min credits' />

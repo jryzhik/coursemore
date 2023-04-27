@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 
-export default function AmPm() {
+export default function AmPm(props) {
     const [am, setAM] = useState(false)
     const [pm, setPM] = useState(false)
     const [amClass, setAMClass] = useState('unselected')
@@ -35,13 +35,17 @@ export default function AmPm() {
     useEffect(() => {
         if (am) {
             setAMClass('selected')
+            props.handleCallBack(props.time_class, 'am')
         } else {
             setAMClass('unselected')
+            props.handleCallBack(props.time_class, 'pm')
         }
         if (pm) {
             setPMClass('selected')
+            props.handleCallBack(props.time_class, 'pm')
         } else {
             setPMClass('unselected')
+            props.handleCallBack(props.time_class, 'am')
         }
     }, [am, pm])
 
