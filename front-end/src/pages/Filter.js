@@ -92,8 +92,8 @@ function Filter() {
           }} />
         </Grid>
         <Box
-          paddingLeft={22}
-          paddingRight={22}
+          paddingLeft={26}
+          paddingRight={26}
           paddingTop={7}
           >
           <Grid container spacing={2} justifyContent={'flex-start'}>
