@@ -83,7 +83,7 @@ function Rank() {
         })
         parameters['ranking'] = newArr
         console.log("Final Object", parameters)
-        //   navigate('/results', { state: parametersFiltered });
+          navigate('/results', { state: parameters });
     };
     return (
         <ThemeProvider theme={MainTheme}>
