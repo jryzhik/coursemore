@@ -19,7 +19,7 @@ export default function ButtonIcon(props) {
         } else {
             setStyle("unselected")
             setPadding(3)
-            props.handleCallBack(props.attribute, false)
+            props.handleCallBack(props.attribute, null)
 
         }
 }

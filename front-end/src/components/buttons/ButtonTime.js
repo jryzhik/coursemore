@@ -34,11 +34,13 @@ export default function ButtonTime(props) {
     const handleClick = () => {
         if (style === 'unselected' && !timeBlockAction) {
             setStyle("selected")
+            props.handleCallBack('start', military_time(time_period_selection.start, time_period_selection.start_hour))
+            props.handleCallBack('end', military_time(time_period_selection.end, time_period_selection.end_hour))
         } else if (style === 'selected' && !timeBlockAction) {
             setStyle("unselected")
+            props.handleCallBack('start', null)
+            props.handleCallBack('end', null)
         }
-        props.handleCallBack('start', military_time(time_period_selection.start, time_period_selection.start_hour))
-        props.handleCallBack('end', military_time(time_period_selection.end, time_period_selection.end_hour))
 
     }
     return (

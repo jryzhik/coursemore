@@ -37,9 +37,9 @@ function Filter() {
   const [inputFields, setInputFields] = useState(
     {
       dayBlock: null,
-      profGPA: false,
+      profGPA: null,
       hourBlock: { start: null, end: null },
-      techSquare: false,
+      techSquare: null,
       minCredits: null,
       maxCredits: null,
       mandatoryCourse: null,
