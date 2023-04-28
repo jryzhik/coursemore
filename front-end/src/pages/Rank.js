@@ -64,12 +64,6 @@ function Rank() {
         }
     });
 
-    const navigate = useNavigate();
-    function nextHandle() {
-      const createObject = parameters 
-      navigate('/results', { state: parametersFiltered });
-    };
-
     const [courses, updateCourses] = useState(parametersFiltered);
     function handleOnDragEnd(result) {
         if (!result.destination) return;
@@ -81,6 +75,16 @@ function Rank() {
         updateCourses(items);
     }
 
+    const navigate = useNavigate();
+    function nextHandle() {
+        const newArr = []
+        courses.forEach((element) => {
+            newArr.push(element.id)
+        })
+        parameters['ranking'] = newArr
+        console.log("Final Object", parameters)
+        //   navigate('/results', { state: parametersFiltered });
+    };
     return (
         <ThemeProvider theme={MainTheme}>
             <Header />
