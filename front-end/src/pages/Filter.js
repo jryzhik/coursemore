@@ -8,6 +8,8 @@ import Grid from '@mui/material/Grid';
 import Footer from '../components/Footer';
 import UserImage from '../img/user.svg'
 import FilterIcon from '../img/filter_icon.svg'
+import ArrowNext from '../img/arrow_next.svg'
+
 import FilterButton from '../components/buttons/FilterButton';
 
 import { Box } from '@mui/system'
@@ -18,32 +20,41 @@ import CrossBlock from '../img/cross_block.svg'
 import ButtonTime from '../components/buttons/ButtonTime';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+
 
 function Filter() {
   const location = useLocation()
   const requiredCourses = location.state
   console.log("passed down req courses", requiredCourses)
 
+
+  const navigate = useNavigate();
+  function nextHandle(passfrom) {
+    navigate('/rank', { state: passfrom });
+  };
+
   const [inputFields, setInputFields] = useState(
-    { dayBlock: null,
-      profGPA: false,
-      hourBlock: {start: null, end: null},
-      techSquare: false,
+    {
+      dayBlock: null,
+      profGPA: null,
+      hourBlock: { start: null, end: null },
+      techSquare: null,
       minCredits: null,
       maxCredits: null,
       mandatoryCourse: null,
       degreeWorksCourses: requiredCourses
     }
   )
-  
+
   function childCallBack(attribute, value) {
-    setInputFields(prevInputFields => ({ ...prevInputFields, [attribute]: value}))
+    setInputFields(prevInputFields => ({ ...prevInputFields, [attribute]: value }))
   }
 
   function childCallBackTime(attribute, value) {
-    setInputFields(prevInputFields => ({ 
+    setInputFields(prevInputFields => ({
       ...prevInputFields,
-      hourBlock: {...prevInputFields.hourBlock, [attribute]: value},
+      hourBlock: { ...prevInputFields.hourBlock, [attribute]: value },
     }))
   }
 
@@ -95,7 +106,7 @@ function Filter() {
           paddingLeft={26}
           paddingRight={26}
           paddingTop={7}
-          >
+        >
           <Grid container spacing={2} justifyContent={'flex-start'}>
             <Grid item xs={4} md={4}>
               <FilterButton attribute='dayBlock' handleCallBack={childCallBack} width='long' max_length='4' text='day block' />
@@ -128,7 +139,23 @@ function Filter() {
         <ButtonIcon comp={CrossBlock} text='tech square' />
         <ButtonTime width='default' text='hour block' max_length='2' /> */}
 
-
+        <Grid onClick={() =>nextHandle(inputFields)}paddingTop={4} align={"center"}>
+          <Typography color='#EAAA00' variant='h4Info'>next</Typography>
+          <Box
+            paddingLeft={1}
+            component="img"
+            sx={{
+              height: 20,
+            }}
+            alt="next_icon"
+            src={ArrowNext}
+          />
+          <Divider sx={{
+            borderStyle: 'dashed',
+            borderColor: '#EAAA00',
+            width: '5rem'
+          }} />
+        </Grid>
 
         <Grid>
           <Footer />

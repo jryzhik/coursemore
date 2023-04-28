@@ -11,7 +11,7 @@ import CrossBlock from '../img/cross_block.svg'
 import IconNoClick from '../components/buttons/IconNoClick';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import Stack from '@mui/joy/Stack';
-import { Box } from '@mui/system'
+import { useLocation } from 'react-router-dom'
 
 const coursesList = [
     {
@@ -39,6 +39,11 @@ const coursesList = [
 
 
 function Rank() {
+    // Get info from filter page
+    const location = useLocation()
+    const parameters = location.state
+    console.log("passed down filter page", parameters)
+
     const [courses, updateCourses] = useState(coursesList);
     function handleOnDragEnd(result) {
         if (!result.destination) return;
@@ -67,7 +72,7 @@ function Rank() {
                     <Droppable droppableId="characters">
                         {(provided) => (
                             <div className="courses" {...provided.droppableProps} ref={provided.innerRef}>
-                                <Stack paddingTop={10}paddingLeft={30} paddingRight={30} spacing={3}>
+                                <Stack paddingTop={10} paddingLeft={30} paddingRight={30} spacing={3}>
                                     {courses.map(({ id, name, icon }, index) => {
                                         return (
                                             <Draggable key={id} draggableId={id} index={index}>

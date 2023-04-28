@@ -126,7 +126,7 @@ function Upload(props) {
               />
             </Grid>
             <Grid item xs={12}>
-              <Typography variant='h5Thin'>UPLOAD DEGREE WORKS PDF</Typography>
+              <Typography variant='h5Thin'>UPLOAD DEGREE WORKS HTML</Typography>
             </Grid>
           </Grid>
 
