@@ -12,25 +12,29 @@ import IconNoClick from '../components/buttons/IconNoClick';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
 import Stack from '@mui/joy/Stack';
 import { useLocation } from 'react-router-dom'
+import ArrowNext from '../img/arrow_next.svg'
+import { Box } from '@mui/system'
+import Divider from '@mui/material/Divider';
+import { useNavigate } from 'react-router-dom'
 
 const coursesList = [
     {
-        id: 'day',
+        id: 'dayBlock',
         name: 'day block',
         icon: DayBlock
     },
     {
-        id: 'hour',
+        id: 'hourBlock',
         name: 'hour block',
         icon: DayBlock
     },
     {
-        id: 'gpa',
+        id: 'profGPA',
         name: 'professor GPA',
         icon: GPA
     },
     {
-        id: 'tech',
+        id: 'techSquare',
         name: 'tech square',
         icon: CrossBlock
     }
@@ -44,7 +48,23 @@ function Rank() {
     const parameters = location.state
     console.log("passed down filter page", parameters)
 
-    const [courses, updateCourses] = useState(coursesList);
+    const parametersFiltered = coursesList.filter(object_element => {
+        if (object_element.id === 'hourBlock') {
+            if (parameters[object_element.id]?.start !== null && parameters[object_element.id]?.start !== 0 && parameters[object_element.id]?.end !== 0) {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            if (parameters[object_element.id] !== null) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    });
+
+    const [courses, updateCourses] = useState(parametersFiltered);
     function handleOnDragEnd(result) {
         if (!result.destination) return;
 
@@ -55,6 +75,16 @@ function Rank() {
         updateCourses(items);
     }
 
+    const navigate = useNavigate();
+    function nextHandle() {
+        const newArr = []
+        courses.forEach((element) => {
+            newArr.push(element.id)
+        })
+        parameters['ranking'] = newArr
+        console.log("Final Object", parameters)
+          navigate('/results', { state: parameters });
+    };
     return (
         <ThemeProvider theme={MainTheme}>
             <Header />
@@ -90,6 +120,23 @@ function Rank() {
                         )}
                     </Droppable>
                 </DragDropContext>
+                <Grid onClick={nextHandle} paddingTop={4} align={"center"}>
+                    <Typography color='#EAAA00' variant='h4Info'>next</Typography>
+                    <Box
+                        paddingLeft={1}
+                        component="img"
+                        sx={{
+                            height: 20,
+                        }}
+                        alt="next_icon"
+                        src={ArrowNext}
+                    />
+                    <Divider sx={{
+                        borderStyle: 'dashed',
+                        borderColor: '#EAAA00',
+                        width: '5rem'
+                    }} />
+                </Grid>
                 <Grid padding={3} align={"center"}>
                     <Footer />
                 </Grid>
