@@ -19,6 +19,21 @@
     cursor: pointer;
 }
 
+.icon_noselect_btn_unselected {
+    display: flex;
+    background-color: rgb(234, 170, 0, .3);
+    color: #EAAA00;
+    border-color: #EAAA00;  
+    border-width: 2px;  
+    border-style: solid;
+    border-radius: 5px;
+    width: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: .7em;
+    padding-bottom: .5em;
+}
+
 .filter_btn_selected {
     display: flex;
     background-color: rgba(255, 255, 255, 0.3);

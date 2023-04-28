@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import Filter from "./pages/Filter";
 import "./index.css";
+import Rank from "./pages/Rank";
 
 
 const router  = createBrowserRouter([
@@ -14,6 +15,10 @@ const router  = createBrowserRouter([
   {
     path: "filter",
     element: <Filter/>
+  },
+  {
+    path: "rank",
+    element: <Rank/>
   }
 ]);
 
