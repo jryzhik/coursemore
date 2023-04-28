@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import Filter from "./pages/Filter";
 import "./index.css";
 import Rank from "./pages/Rank";
+import Results from "./pages/Results";
+
 
 
 const router  = createBrowserRouter([
@@ -19,6 +21,10 @@ const router  = createBrowserRouter([
   {
     path: "rank",
     element: <Rank/>
+  },
+  {
+    path: "results",
+    element: <Results/>
   }
 ]);
 
