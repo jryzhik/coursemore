@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ThemeProvider, Typography } from '@mui/material';
 import { MainTheme } from '../theme';
 import CssBaseline from "@mui/material/CssBaseline";
@@ -47,6 +47,7 @@ function Rank() {
     const location = useLocation()
     const parameters = location.state
     console.log("passed down filter page", parameters)
+    const navigate = useNavigate();
 
     const parametersFiltered = coursesList.filter(object_element => {
         if (object_element.id === 'hourBlock') {
@@ -63,6 +64,12 @@ function Rank() {
             }
         }
     });
+    useEffect(() => {
+        if (parametersFiltered.length === 1 || parametersFiltered.length === 0) {
+          console.log("take me to nextpage");
+          navigate('/results', { state: parameters });
+        }
+      }, []);
 
     const [courses, updateCourses] = useState(parametersFiltered);
     function handleOnDragEnd(result) {
@@ -75,7 +82,6 @@ function Rank() {
         updateCourses(items);
     }
 
-    const navigate = useNavigate();
     function nextHandle() {
         const newArr = []
         courses.forEach((element) => {
