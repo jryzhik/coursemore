@@ -24,17 +24,16 @@ with open(file_path, 'r') as html_file:
         if rule_in_question.a is not None:
             acceptedCourseListDraft.append(rule_in_question)
     for course in acceptedCourseListDraft:
-        acceptedCourseListFinal = acceptedCourseListFinal + course.find_all('a')
-    for course in acceptedCourseListFinal:
-        course_number = ""
-        for c in course.text:
-            if c.isdigit():
-                course_number = course_number + c
-        requiredCourseNumbersOnly.append(course_number)
-
-    for course in requiredCourseNumbersOnly:
-        if final_string == '':
-            final_string = final_string + course
-        else:
-            final_string = final_string + ',' + course
-print(final_string.strip())
+        acceptedCourseListFinal = acceptedCourseListFinal + [course.find_all('a')]
+    for courseREQ in acceptedCourseListFinal:
+        courseReqList = []
+        for course in courseREQ:
+            if 'CS' in course.attrs['href']:
+                course_number = ""
+                for c in course.text:
+                    if c.isdigit():
+                        course_number = course_number + c
+                courseReqList.append(course_number)
+        if len(courseReqList) != 0:
+            requiredCourseNumbersOnly.append(courseReqList)
+    print(str(requiredCourseNumbersOnly))
