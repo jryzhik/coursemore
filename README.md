@@ -16,17 +16,22 @@ percentEncodedPassword: GT%21ChristMercyGrace%3B%3B23
 ### Run Server
     In the terminal (Back-end Repo)...
         node server.js
+
+### EXAMPLE Degree Works Export (for testing)
+https://github.com/jryzhik/coursemore/blob/main/ExampleDegreeWorks.html
+
 ### FIGMA UI design
 https://www.figma.com/file/LTBjmbi02y4R7yEKTLsATf/coursemore?node-id=0%3A1&t=vctNezqlDxAA4Zuw-1
 
 ### WORK OUTLINE
 
 - [x] Start Rough UI
-- [ ] Filter Page Rough UI
-- [ ] Schedule Page Rough UI
-- [ ] Create Routes
-- [ ] Create Mongo Schema
-- [ ] Create Oscar Scraper
-- [ ] Create Degree Works Scraper
-- [ ] Send Scraper data to Mongo
+- [x] Filter Page Rough UI
+- [x] Rank Page Rough UI
+- [x] Schedule Page Rough UI
+- [x] Create Routes
+- [x] Create Mongo Schema
+- [x] Create Oscar Scraper
+- [x] Create Degree Works Scraper
+- [x] Send Scraper data to Mongo
 - [ ] Create Main Route that takes parameters and returns JSON course
