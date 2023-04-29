@@ -54,8 +54,8 @@ function Upload(props) {
           file.finalFilename = response.data.finalFilename;
           setLastUploadedFileIndex(currentFileIndex);
           setCurrentChunkIndex(null);
-          var courses = response.data.trim().split(',')
-          console.log(courses)
+          var courses = JSON.parse(response.data.replace(/'/g, "\""));
+          // var courses = response.data.trim().split(',')
           props.handleCallBack(courses)
         } else {
           setCurrentChunkIndex(currentChunkIndex + 1);
