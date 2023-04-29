@@ -1,0 +1,609 @@
+
+<!-- saved from url=(0057)https://degreeaudit.gatech.edu/DashboardServlet/dashboard -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>
+ Advising Worksheet for removed for confidentiality</title>
+<link rel="stylesheet" href="./DashboardStyles.css" type="text/css">
+<link rel="stylesheet" href="./DashboardLocalizedStyles.css" type="text/css">
+<script language="JavaScript">
+//////////////////////////////////////////////////////////////////////
+// Get the information for this course when the user clicks on the course
+// as part of AdviceLink
+//////////////////////////////////////////////////////////////////////
+function GetCourseInfo(sDisc, sNumber, sAttribute, sAttributeOp)
+{
+var sWindowParams = "width=600,height=300,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes";
+var sWindowName = "wCourseInfo";
+var wNew = window.open("", sWindowName, sWindowParams);
+
+
+   sThisAttribute = "";
+   sThisAttributeOp = "";
+   if (sAttribute != undefined)
+   {
+      sThisAttribute = sAttribute;
+       if (sAttributeOp != undefined)
+       {
+        if (sAttributeOp == "<>")
+         sThisAttributeOp = "<>";    // not-equals
+        else if (sAttributeOp == "<=")
+         sThisAttributeOp = "<=";       // less-than-equals
+        else if (sAttributeOp == ">=")
+         sThisAttributeOp = ">=";       // greater-than-equals
+        else if (sAttributeOp == "<")
+         sThisAttributeOp = "<";        // less-than
+        else if (sAttributeOp == ">")
+         sThisAttributeOp = ">";        //   greater-than
+          else // default to equals
+         sThisAttributeOp = "=";           // equsls
+       }
+   }
+    // Do not use the frmCourseInfo form in frControl because SEP cannot make use of it
+    // Instead both in classic and in SEP we will create a new form that we will use instead
+
+    var method = "POST";
+    // This --path-- will be replaced by a complete URL to degreeworks by the SEP Java code
+    // If we are not w/in SEP then the path needs to be the name we find in frControl
+    var pathToCgi = '--path--';
+
+    // If we are not in SEP the frControl frame should exist - so get the action
+    if (pathToCgi.substring(0,2) == "--" && typeof(top.frControl) != "undefined")
+      pathToCgi = top.frControl.document.frmCourseInfo.action;
+
+    // Create a new form for the request
+    var form = document.createElement("form");
+    // Move the submit function to another variable so that it doesn't get overwritten
+    form._submit_function_ = form.submit;
+
+    form.setAttribute("method", method);
+    form.setAttribute("action", pathToCgi);
+    form.setAttribute("target", sWindowName);
+
+    appendFormChild(form, "COURSEDISC",   '"' + sDisc   + '"');
+    appendFormChild(form, "COURSENUMB",   '"' + sNumber + '"');
+    appendFormChild(form, "SCRIPT",       "SD2COURSEINFO");
+    appendFormChild(form, "COURSEATTR",   sThisAttribute);
+    appendFormChild(form, "COURSEATTROP", sThisAttributeOp);
+    appendFormChild(form, "REPORT",        'WEB36');
+    appendFormChild(form, "REPORTUCLASS",  'WEB36STU');
+    
+    appendFormChild(form, "ContentType", "xml");
+    document.body.appendChild(form);
+    form._submit_function_(); // call the renamed function
+    wNew.focus(); 
+}
+//////////////////////////////////////////////////////////////////////
+function appendFormChild(form, inputName, inputValue)
+{
+  var hiddenElement = document.createElement("input");
+  hiddenElement.setAttribute("type", "hidden");
+  hiddenElement.setAttribute("name", inputName);
+  hiddenElement.setAttribute("value",inputValue);
+ 
+  form.appendChild(hiddenElement);
+}
+</script></head><body style="margin: 5px;" marginwidth="0" marginheight="0" data-new-gr-c-s-check-loaded="14.1106.0" data-gr-ext-installed=""><form name="frmAudit" id="frmAudit">
+<table border="0" cellspacing="0" cellpadding="0" width="100%" class="SchoolName"><tbody><tr><td align="left" valign="top"><table border="0" cellspacing="0" cellpadding="4" width="100%"><tbody><tr><td align="center" valign="middle"><span class="SchoolName">Georgia Tech DegreeWorks Audit</span></td></tr></tbody></table></td></tr></tbody></table>
+<table border="0" cellspacing="1" cellpadding="0" width="100%"><tbody><tr><td></td></tr></tbody></table>
+<table border="0" cellspacing="1" cellpadding="0" width="100%" class="Blocks">
+<tbody><tr class="TableHead"><td colspan="20"><table border="0" cellspacing="0" cellpadding="0" width="100%" class="BlockHeader">
+<tbody><tr><td class="AuditHeadBorderDark" colspan="4"></td></tr>
+<tr><td class="AuditHeadBorderLight" colspan="4"></td></tr>
+<tr>
+<td class="BlockHeader" colspan="1" rowspan="2" valign="middle" nowrap="">
+<img src="./spacer.gif" ondragstart="window.event.returnValue=false;" width="5" alt=""><img src="./dwcheckno.png" ondragstart="window.event.returnValue=false;">
+</td>
+<td width="100%" align="left" class="BlockHeadTitle">BSCS - Degree Requirements</td>
+<td align="right"><table border="0" cellspacing="1" cellpadding="2" width="100%" class="BlockHeader"><tbody><tr>
+<td class="BlockHeadSubTitle" align="right">
+							Catalog Year: 
+						</td>
+<td class="BlockHeadSubData" align="right">
+							&nbsp; 2023-2024</td>
+</tr></tbody></table></td>
+</tr>
+<tr><td class="AuditHeadBorderDark" colspan="4"></td></tr>
+<tr><td class="AuditHeadBorderLight" colspan="4"></td></tr>
+</tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">Still Needed:</td>
+<td class="RuleAdviceData"> 
+							See BSCS - Core Requirements section
+						</td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">Still Needed:</td>
+<td class="RuleAdviceData">
+									See BSCS - Major Requirements section <br>
+</td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">Still Needed:</td>
+<td class="RuleAdviceData"> 
+							See BSCS - Electives section
+						</td>
+</tr></tbody></table></td></tr>
+</tbody></table>
+<table border="0" cellspacing="1" cellpadding="0" width="100%"><tbody><tr><td></td></tr></tbody></table>
+<table border="0" cellspacing="1" cellpadding="0" width="100%" class="Blocks">
+<tbody><tr class="TableHead"><td colspan="20"><table border="0" cellspacing="0" cellpadding="0" width="100%" class="BlockHeader">
+<tbody><tr><td class="AuditHeadBorderDark" colspan="4"></td></tr>
+<tr><td class="AuditHeadBorderLight" colspan="4"></td></tr>
+<tr>
+<td class="BlockHeader" colspan="1" rowspan="2" valign="middle" nowrap="">
+<img src="./spacer.gif" ondragstart="window.event.returnValue=false;" width="5" alt=""><img src="./dwcheckno.png" ondragstart="window.event.returnValue=false;">
+</td>
+<td width="100%" align="left" class="BlockHeadTitle">BSCS - Core Requirements</td>
+<td align="right"><table border="0" cellspacing="1" cellpadding="2" width="100%" class="BlockHeader">
+<tbody><tr>
+<td class="BlockHeadSubTitle" align="right">
+							&nbsp; </td>
+<td class="BlockHeadSubData">
+							&nbsp; </td>
+</tr>
+<tr>
+<td class="BlockHeadSubTitle" align="right">
+							&nbsp; </td>
+<td class="BlockHeadSubData">
+							&nbsp; </td>
+</tr>
+</tbody></table></td>
+</tr>
+<tr><td class="AuditHeadBorderDark" colspan="4"></td></tr>
+<tr><td class="AuditHeadBorderLight" colspan="4"></td></tr>
+</tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td colspan="1" class="RuleAdviceTitle" style="white-space:nowrap">Still Needed:</td>
+<td colspan="9" class="RuleAdviceData"><a target="_blank" href="http://catalog.gatech.edu/academics/undergraduate/core-curriculum/core-area-c/">3 credits in Humanities are required.&nbsp;</a></td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td colspan="1" class="RuleAdviceTitle" style="white-space:nowrap">Still Needed:</td>
+<td colspan="9" class="RuleAdviceData"><a target="_blank" href="http://catalog.gatech.edu/academics/undergraduate/core-curriculum/core-area-e/">6 credits in Social Science Courses are&nbsp;required.&nbsp;</a></td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td colspan="1" class="RuleAdviceTitle" style="white-space:nowrap">Still Needed:</td>
+<td colspan="9" class="RuleAdviceData"><a target="_blank" href="http://catalog.gatech.edu/academics/undergraduate/core-curriculum/core-area-d/">Lab science (4 hours) course(s) required.&nbsp;</a></td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">Still Needed:</td>
+<td class="RuleAdviceData">
+<b>1</b>
+								Class
+								 
+                        in 
+
+						<a href="javascript:GetCourseInfo(&#39;CS&#39;,&#39;2050&#39;);" title="Intro Discrete Math CS - 3 Credits"><b>CS</b>&nbsp;2050</a>
+										or       <a href="javascript:GetCourseInfo(&#39;CS&#39;,&#39;2051&#39;);" title="Honors Discrete Math CS - 3 Credits">2051</a>
+</td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">Still Needed:</td>
+<td class="RuleAdviceData">
+<b>1</b>
+								Class
+								 
+                        in 
+
+						<a href="javascript:GetCourseInfo(&#39;MATH&#39;,&#39;2550&#39;);" title="Intro Multivariable Calc - 2 Credits"><b>MATH</b>&nbsp;2550</a>*</td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td colspan="1" class="RuleAdviceTitle" style="white-space:nowrap">Still Needed:</td>
+<td colspan="9" class="RuleAdviceData">Of the three lab sciences required - PHYS 2211,&nbsp;Core D Lab Science, and Courses Related to Major&nbsp;Lab Science - TWO must be part of the same sequence.&nbsp;Allowable sequences include: BIOS 1107/1107L and&nbsp;BIOS 1108/1108L; BIOS 1220 and BIOS 1107/1107L or&nbsp;BIOS 1108/1108L; CHEM 1310 and 1212K, CHEM 1211K and 1212K;&nbsp;EAS 1600 and 1601, EAS 1600 and 2600, EAS 1601 and 2600;&nbsp;PHYS 2211 and 2212, PHYS 2211 and 2232, PHYS 2231 and 2212,&nbsp;PHYS 2231 and 2232.&nbsp;</td>
+</tr></tbody></table></td></tr>
+</tbody></table>
+<table border="0" cellspacing="1" cellpadding="0" width="100%"><tbody><tr><td></td></tr></tbody></table>
+<table border="0" cellspacing="1" cellpadding="0" width="100%" class="Blocks">
+<tbody><tr class="TableHead"><td colspan="20"><table border="0" cellspacing="0" cellpadding="0" width="100%" class="BlockHeader">
+<tbody><tr><td class="AuditHeadBorderDark" colspan="4"></td></tr>
+<tr><td class="AuditHeadBorderLight" colspan="4"></td></tr>
+<tr>
+<td class="BlockHeader" colspan="1" rowspan="2" valign="middle" nowrap="">
+<img src="./spacer.gif" ondragstart="window.event.returnValue=false;" width="5" alt=""><img src="./dwcheckno.png" ondragstart="window.event.returnValue=false;">
+</td>
+<td width="100%" align="left" class="BlockHeadTitle">BSCS - Major Requirements</td>
+<td align="right"><table border="0" cellspacing="1" cellpadding="2" width="100%" class="BlockHeader">
+<tbody><tr>
+<td class="BlockHeadSubTitle" align="right">
+							Catalog Year: 
+						</td>
+<td class="BlockHeadSubData">
+							&nbsp; 2023-2024</td>
+</tr>
+<tr>
+<td class="BlockHeadSubTitle" align="right">
+							GPA:
+						</td>
+<td class="BlockHeadSubData">
+							&nbsp; 0.00</td>
+</tr>
+</tbody></table></td>
+</tr>
+<tr><td class="AuditHeadBorderDark" colspan="4"></td></tr>
+<tr><td class="AuditHeadBorderLight" colspan="4"></td></tr>
+</tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">Still Needed:</td>
+<td class="RuleAdviceData">
+<b>1</b>
+								Class
+								 
+                        in 
+
+						<a href="javascript:GetCourseInfo(&#39;CS&#39;,&#39;2340&#39;);" title="Objects and Design - 3 Credits"><b>CS</b>&nbsp;2340</a>*</td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">Still Needed:</td>
+<td class="RuleAdviceData">
+<b>1</b>
+								Class
+								 
+                        in 
+
+						<a href="javascript:GetCourseInfo(&#39;CS&#39;,&#39;3001&#39;);" title="Computing &amp; Society - 3 Credits"><b>CS</b>&nbsp;3001</a>
+										or       <a href="javascript:GetCourseInfo(&#39;CS&#39;,&#39;4001&#39;);" title="Computing &amp; Society - 3 Credits">4001</a>
+										or       <a href="javascript:GetCourseInfo(&#39;CS&#39;,&#39;4002&#39;);" title="Robots and Society - 3 Credits">4002</a>
+										or       <a href="javascript:GetCourseInfo(&#39;CS&#39;,&#39;4003&#39;);" title="AI Ethics and Society - 3 Credits">4003</a>
+										or       <a href="javascript:GetCourseInfo(&#39;CS&#39;,&#39;4726&#39;);" title="Privacy Tech Policy Law - 3 Credits">4726</a>
+										or       <a href="javascript:GetCourseInfo(&#39;SLS&#39;,&#39;3110&#39;);" title="Tech and Sustain Community - 3 Credits"><b>SLS</b>&nbsp;3110</a>
+</td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">Still Needed:</td>
+<td class="RuleAdviceData"> 
+                 Choose from 1 of the following: 
+                </td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</td>
+<td class="RuleAdviceData">
+<img src="./dwinvis2.gif" ondragstart="window.event.returnValue=false;">
+					(
+					<b>6</b>&nbsp;Credits                        
+                        in 
+
+						<a href="javascript:GetCourseInfo(&#39;LMC&#39;,&#39;3432&#39;);" title="Tech Comm Strategies - 2 Credits"><b>LMC</b>&nbsp;3432</a>*
+										and <a href="javascript:GetCourseInfo(&#39;LMC&#39;,&#39;3431&#39;);" title="Tech Comm Approaches - 1 Credit">3431</a>*
+										and <a href="javascript:GetCourseInfo(&#39;CS&#39;,&#39;3311&#39;);" title="Project Design - 1 Credit"><b>CS</b>&nbsp;3311</a>*
+										and <a href="javascript:GetCourseInfo(&#39;CS&#39;,&#39;3312&#39;);" title="Project Implementation - 2 Credits">3312</a>*
+					) 
+					
+							  or  </td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</td>
+<td class="RuleAdviceData">
+<img src="./dwinvis2.gif" ondragstart="window.event.returnValue=false;">
+					(
+					 
+                 Choose from 2 of the following: 
+                
+					) 
+					
+							  or  </td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td colspan="1" class="RuleAdviceTitle" style="white-space:nowrap">
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<img src="./dwinvis3.gif" ondragstart="window.event.returnValue=false;">
+</td>
+<td colspan="9" class="RuleAdviceData">
+					(
+					<a target="_blank" href="http://www.catalog.gatech.edu/programs/computer-science-bs/">Advisor will apply VIP Course Requirement when course is complete.&nbsp;</a>
+					) 
+					
+							  and  </td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</td>
+<td class="RuleAdviceData">
+<img src="./dwinvis3.gif" ondragstart="window.event.returnValue=false;">
+					(
+					<b>1</b>
+								Class
+								 
+                        in 
+
+						<a href="javascript:GetCourseInfo(&#39;LMC&#39;,&#39;3403&#39;);" title="Tech Communication - 3 Credits"><b>LMC</b>&nbsp;3403</a>*
+					) 
+					</td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</td>
+<td class="RuleAdviceData">
+<img src="./dwinvis2.gif" ondragstart="window.event.returnValue=false;">
+					(
+					 
+                 Choose from 2 of the following: 
+                
+					) 
+					
+							  or  </td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td colspan="1" class="RuleAdviceTitle" style="white-space:nowrap">
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<img src="./dwinvis3.gif" ondragstart="window.event.returnValue=false;">
+</td>
+<td colspan="9" class="RuleAdviceData">
+					(
+					<a target="_blank" href="http://www.catalog.gatech.edu/programs/computer-science-bs/">Advisor will apply CS Undergrad Research&nbsp;courses when course is complete.&nbsp;</a>
+					) 
+					
+							  and  </td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</td>
+<td class="RuleAdviceData">
+<img src="./dwinvis3.gif" ondragstart="window.event.returnValue=false;">
+					(
+					<b>2</b>
+								Classes
+								 
+                        in 
+
+						<a href="javascript:GetCourseInfo(&#39;LMC&#39;,&#39;4701&#39;);" title="US Rsch Proposal Writing - 1 Credit"><b>LMC</b>&nbsp;4701</a>*
+										and <a href="javascript:GetCourseInfo(&#39;LMC&#39;,&#39;4702&#39;);" title="US Rsch Thesis Writing - 1 Credit">4702</a>*
+					) 
+					</td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</td>
+<td class="RuleAdviceData">
+<img src="./dwinvis2.gif" ondragstart="window.event.returnValue=false;">
+					(
+					 
+                 Choose from 2 of the following: 
+                
+					) 
+					
+							  or  </td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</td>
+<td class="RuleAdviceData">
+<img src="./dwinvis3.gif" ondragstart="window.event.returnValue=false;">
+					(
+					<b>1</b>
+								Class
+								 
+                        in 
+
+						<a href="javascript:GetCourseInfo(&#39;LMC&#39;,&#39;3403&#39;);" title="Tech Communication - 3 Credits"><b>LMC</b>&nbsp;3403</a>*
+					) 
+					
+							  and  </td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td colspan="1" class="RuleAdviceTitle" style="white-space:nowrap">
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<img src="./dwinvis3.gif" ondragstart="window.event.returnValue=false;">
+</td>
+<td colspan="9" class="RuleAdviceData">
+					(
+					<a target="_blank" href="http://www.catalog.gatech.edu/programs/computer-science-bs/">Advisor will apply courses for the CREATE-X Option.&nbsp;</a>
+					) 
+					</td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</td>
+<td class="RuleAdviceData">
+<img src="./dwinvis2.gif" ondragstart="window.event.returnValue=false;">
+					(
+					 
+                 Choose from 2 of the following: 
+                
+					) 
+					</td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</td>
+<td class="RuleAdviceData">
+<img src="./dwinvis3.gif" ondragstart="window.event.returnValue=false;">
+					(
+					<b>1</b>
+								Class
+								 
+                        in 
+
+						<a href="javascript:GetCourseInfo(&#39;CS&#39;,&#39;4723&#39;);" title="Inter Capstone Design - 3 Credits"><b>CS</b>&nbsp;4723</a>*
+					) 
+					
+							  and  </td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</td>
+<td class="RuleAdviceData">
+<img src="./dwinvis3.gif" ondragstart="window.event.returnValue=false;">
+					(
+					<b>1</b>
+								Class
+								 
+                        in 
+
+						<a href="javascript:GetCourseInfo(&#39;LMC&#39;,&#39;3403&#39;);" title="Tech Communication - 3 Credits"><b>LMC</b>&nbsp;3403</a>*
+					) 
+					</td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td colspan="1" class="RuleAdviceTitle" style="white-space:nowrap">Still Needed:</td>
+<td colspan="9" class="RuleAdviceData">***IMPORTANT: Please note that because you have&nbsp;not yet selected your concentration through the&nbsp;Concentration Management function within OSCAR,&nbsp;this portion of your degree program will not be&nbsp;reflected. In order to view your audit accurately,&nbsp;please visit www.oscar.gatech.edu and select your&nbsp;concentration using the Concentration Management&nbsp;tool. Please consult with your advisor as needed.&nbsp;</td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">Still Needed:</td>
+<td class="RuleAdviceData">
+<b>1</b>
+								Class
+								 
+                        in 
+
+						<a href="javascript:GetCourseInfo(&#39;MATH&#39;,&#39;3012&#39;);" title="Applied Combinatorics - 3 Credits"><b>MATH</b>&nbsp;3012</a>*</td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">Still Needed:</td>
+<td class="RuleAdviceData"> 
+                 Choose from 1 of the following: 
+                </td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</td>
+<td class="RuleAdviceData">
+<img src="./dwinvis3.gif" ondragstart="window.event.returnValue=false;">
+					(
+					<b>1</b>
+								Class
+								 
+                        in 
+
+						<a href="javascript:GetCourseInfo(&#39;MATH&#39;,&#39;3215&#39;);" title="Probability &amp; Statistics - 3 Credits"><b>MATH</b>&nbsp;3215</a>*
+										or       <a href="javascript:GetCourseInfo(&#39;MATH&#39;,&#39;3670&#39;);" title="Statistics and Applns - 3 Credits">3670</a>*
+										or       <a href="javascript:GetCourseInfo(&#39;CEE&#39;,&#39;3770&#39;);" title="Statistics&amp; Applications - 3 Credits"><b>CEE</b>&nbsp;3770</a>*
+										or       <a href="javascript:GetCourseInfo(&#39;ISYE&#39;,&#39;3770&#39;);" title="Statistics&amp; Applications - 3 Credits"><b>ISYE</b>&nbsp;3770</a>*
+					) 
+					
+							  or  </td>
+</tr></tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td class="RuleAdviceTitle" style="white-space:nowrap" colspan="1">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</td>
+<td class="RuleAdviceData">
+<img src="./dwinvis3.gif" ondragstart="window.event.returnValue=false;">
+					(
+					<b>2</b>
+								Classes
+								 
+                        in 
+
+						<a href="javascript:GetCourseInfo(&#39;ISYE&#39;,&#39;2027&#39;);" title="Probability With Apps - 3 Credits"><b>ISYE</b>&nbsp;2027</a>*
+										and <a href="javascript:GetCourseInfo(&#39;ISYE&#39;,&#39;2028&#39;);" title="Basic Statistical Meth - 3 Credits">2028</a>*
+					) 
+					</td>
+</tr></tbody></table></td></tr>
+</tbody></table>
+<table border="0" cellspacing="1" cellpadding="0" width="100%"><tbody><tr><td></td></tr></tbody></table>
+<table border="0" cellspacing="1" cellpadding="0" width="100%" class="Blocks">
+<tbody><tr class="TableHead"><td colspan="20"><table border="0" cellspacing="0" cellpadding="0" width="100%" class="BlockHeader">
+<tbody><tr><td class="AuditHeadBorderDark" colspan="4"></td></tr>
+<tr><td class="AuditHeadBorderLight" colspan="4"></td></tr>
+<tr>
+<td class="BlockHeader" colspan="1" rowspan="2" valign="middle" nowrap="">
+<img src="./spacer.gif" ondragstart="window.event.returnValue=false;" width="5" alt=""><img src="./dwcheckno.png" ondragstart="window.event.returnValue=false;">
+</td>
+<td width="100%" align="left" class="BlockHeadTitle">BSCS - Electives</td>
+<td align="right"><table border="0" cellspacing="1" cellpadding="2" width="100%" class="BlockHeader">
+<tbody><tr>
+<td class="BlockHeadSubTitle" align="right">
+							&nbsp; </td>
+<td class="BlockHeadSubData">
+							&nbsp; </td>
+</tr>
+<tr>
+<td class="BlockHeadSubTitle" align="right">
+							&nbsp; </td>
+<td class="BlockHeadSubData">
+							&nbsp; </td>
+</tr>
+</tbody></table></td>
+</tr>
+<tr><td class="AuditHeadBorderDark" colspan="4"></td></tr>
+<tr><td class="AuditHeadBorderLight" colspan="4"></td></tr>
+</tbody></table></td></tr>
+<tr><td class="xxxxRuleLabelData" width="100%"><table border="0" cellspacing="1" cellpadding="1" width="100%"><tbody><tr>
+<td colspan="1" class="RuleAdviceTitle" style="white-space:nowrap">Still Needed:</td>
+<td colspan="9" class="RuleAdviceData">***IMPORTANT: Please note that because you have&nbsp;not yet selected your concentration through the&nbsp;Concentration Management function within OSCAR,&nbsp;this portion of your degree program will not be&nbsp;reflected. In order to view your audit accurately,&nbsp;please visit www.oscar.gatech.edu and select your&nbsp;concentration using the Concentration Management&nbsp;tool. Please consult with your advisor as needed.&nbsp;</td>
+</tr></tbody></table></td></tr>
+</tbody></table>
+<br><br><script language="JavaScript">
+try
+{
+	top.frSelection.ToggleButtons("on");	
+}
+catch (err)
+{
+	// this is fine -- it just means the top frame does not exist
+}
+</script>
+</form>
+
+
+
+
+
+
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+  div.grammarly-desktop-integration {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select:none;
+    user-select:none;
+  }
+
+  div.grammarly-desktop-integration:before {
+    content: attr(data-content);
+  }
+</style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>
