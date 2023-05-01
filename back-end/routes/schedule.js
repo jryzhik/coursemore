@@ -57,10 +57,13 @@ function reduceToOneReq(listOfLists, priori) {
   }
   var singleList = [];
   for (var i = 0; i < listOfLists.length; i++) {
-    var newObj = JSON.parse(JSON.stringify(listOfLists[i]));
-    singleList.push(newObj);
+    if(listOfLists[i]){
+      //(listOfLists[i]);
+      var newObj = JSON.parse(JSON.stringify(listOfLists[i]));
+      singleList.push(newObj);
+    }
   }
-  console.log(singleList);
+  //console.log(singleList);
   return singleList;
 }
 
@@ -87,57 +90,58 @@ var rangeGPA = maxGPA - minGPA;
 var gpaArray = JSON.parse(JSON.stringify(allowedCourses));
 var timingArray = JSON.parse(JSON.stringify(allowedCourses));
 
-for (var i = 0; i < allowedCourses.length; i++) {
-  var course = allowedCourses[i];
-  if (course.CourseNumber == inputMandatory) {
-    calculateScore(course, priorities, true);
-  } else {
-    calculateScore(course, priorities, false);
-  }
-}
-allowedCourses.sort((a, b) => b.score - a.score);
+// for (var i = 0; i < allowedCourses.length; i++) {
+//   var course = allowedCourses[i];
+//   if (course.CourseNumber == inputMandatory) {
+//     calculateScore(course, priorities, true);
+//   } else {
+//     calculateScore(course, priorities, false);
+//   }
+// }
+// allowedCourses.sort((a, b) => b.score - a.score);
 
-for (var i = 0; i < gpaArray.length; i++) {
-  var course = gpaArray[i];
-  if (course.CourseNumber == inputMandatory) {
-    calculateScore(course, priorities, true);
-  } else {
-    calculateScore(course, priorities, false);
-  }
-}
-gpaArray.sort((a, b) => b.score - a.score);
+// for (var i = 0; i < gpaArray.length; i++) {
+//   var course = gpaArray[i];
+//   if (course.CourseNumber == inputMandatory) {
+//     calculateScore(course, priorities, true);
+//   } else {
+//     calculateScore(course, priorities, false);
+//   }
+// }
+// gpaArray.sort((a, b) => b.score - a.score);
 
-for (var i = 0; i < timingArray.length; i++) {
-  var course = timingArray[i];
-  if (course.CourseNumber == inputMandatory) {
-    calculateScore(course, priorities, true);
-  } else {
-    calculateScore(course, priorities, false);
-  }
-}
-timingArray.sort((a, b) => b.score - a.score);
+// for (var i = 0; i < timingArray.length; i++) {
+//   var course = timingArray[i];
+//   if (course.CourseNumber == inputMandatory) {
+//     calculateScore(course, priorities, true);
+//   } else {
+//     calculateScore(course, priorities, false);
+//   }
+// }
+// timingArray.sort((a, b) => b.score - a.score);
 
-var schedule = generateSchedule(
-  allowedCourses,
-  inputMinCredits,
-  inputMaxCredits
-);
+// var schedule = generateSchedule(
+//   allowedCourses,
+//   inputMinCredits,
+//   inputMaxCredits
+// );
 
-var gpaSchedule = generateSchedule(gpaArray, inputMinCredits, inputMaxCredits);
+// var gpaSchedule = generateSchedule(gpaArray, inputMinCredits, inputMaxCredits);
 
-var timingSchedule = generateSchedule(
-  timingArray,
-  inputMinCredits,
-  inputMaxCredits
-);
+// var timingSchedule = generateSchedule(
+//   timingArray,
+//   inputMinCredits,
+//   inputMaxCredits
+// );
 
-console.log(schedule);
-console.log(gpaSchedule);
-console.log(timingSchedule);
+// console.log(schedule);
+// console.log(gpaSchedule);
+// console.log(timingSchedule);
 
 function generateSchedule(courses, minCredits, maxCredits) {
   let credits = 0;
   const schedule = [];
+  const set = new Set();
 
   for (let i = 0; i < courses.length && credits < maxCredits; i++) {
     const course = courses[i];
@@ -187,14 +191,21 @@ function generateSchedule(courses, minCredits, maxCredits) {
           break;
         }
       }
-
+     //hasConflict = false;
       if (hasConflict) {
-        console.log("There is a time conflict and the class cannot be added.");
+        
       } else {
-        console.log("No time conflict, class can be added to schedule.");
+        //console.log("No time conflict, class can be added to schedule.");
         // add class to schedule here
-        schedule.push(course);
-        credits += parseInt(course.Credits);
+        if(set.has(course.requirement)){
+          console.log("nothing");
+        }else{
+          console.log(course);
+          console.log("something");
+          schedule.push(course);
+          credits += parseInt(course.Credits);
+          set.add(course.requirement);
+        }
       }
     }
   }
@@ -329,7 +340,7 @@ function calculateScore(course, priori, bool) {
     score += priori.hourBlock * 0;
   }
   course.score = score;
-  console.log(course.score);
+  //console.log(course.score);
 }
 
 // Convert array of string days to letter representations
@@ -461,77 +472,92 @@ getCourses(req)
         // console.log(inputdayBlock);
         // console.log(hourBlock);
         // console.log(inputs);
-        courses = createFinalArray(temp);
+        courses = temp;
+        var x = createFinalArray(temp);
+        for(var i = 0 ; i < x.length ; i++){
+          for(var j = 0 ; j < x[i].length ; j++){
+            x[i][j].requirement = i;
+          }
+        }
+
+        //courses = courses.map(subArr => subArr.filter(value => value !== undefined));
+        // console.log("hello")
+        // console.log(courses);
+        // console.log("bye")
         // this is abrar code
 
-        var inputs = ["GPA", "techSquare", "dayBlock", "hourBlock"];
-var priorities = inverseMapping(inputs);
+        //var inputs = ["GPA", "techSquare", "dayBlock", "hourBlock"];
+        var priorities = inverseMapping(inputs);
 
 //console.log(courses);
 
-var inputdayBlock = ["F"]; // M, T, W, R, F, blocks whole day.
-var inputhourBlock = [8, 9, 10, 11, 12]; //military, blocks entire hour.
-var inputMandatory = "1332";
-var inputMinCredits = 12;
-var inputMaxCredits = 16;
-var reducedReq = reduceToOneReq(courses, priorities);
+        // var inputdayBlock = ["F"]; // M, T, W, R, F, blocks whole day.
+        // var inputhourBlock = [8, 9, 10, 11, 12]; //military, blocks entire hour.
+        // var inputMandatory = "1332";
+        // var inputMinCredits = 12;
+        // var inputMaxCredits = 16;
+        // reducedReq = reduceToOneReq(courses, priorities);
+        reducedReq = courses;
 
-var allowedCourses = prune(reducedReq);
-var gpas = courses.map((course) => course.GPA);
-var minGPA = Math.min(...gpas);
-var maxGPA = Math.max(...gpas);
-var rangeGPA = maxGPA - minGPA;
+        allowedCourses = prune(reducedReq);
+        //console.log()
+        gpas = courses.map((course) => course.GPA);
+        minGPA = Math.min(...gpas);
+        maxGPA = Math.max(...gpas);
+        rangeGPA = maxGPA - minGPA;
 
-var gpaArray = JSON.parse(JSON.stringify(allowedCourses));
-var timingArray = JSON.parse(JSON.stringify(allowedCourses));
+        gpaArray = JSON.parse(JSON.stringify(allowedCourses));
+        timingArray = JSON.parse(JSON.stringify(allowedCourses));
 
-for (var i = 0; i < allowedCourses.length; i++) {
-  var course = allowedCourses[i];
-  if (course.CourseNumber == inputMandatory) {
-    calculateScore(course, priorities, true);
-  } else {
-    calculateScore(course, priorities, false);
-  }
-}
-allowedCourses.sort((a, b) => b.score - a.score);
+        for (var i = 0; i < allowedCourses.length; i++) {
+          var course = allowedCourses[i];
+          if (course.CourseNumber == inputMandatory) {
+            calculateScore(course, priorities, true);
+          } else {
+            calculateScore(course, priorities, false);
+          }
+        }
+        allowedCourses.sort((a, b) => b.score - a.score);
 
-for (var i = 0; i < gpaArray.length; i++) {
-  var course = gpaArray[i];
-  if (course.CourseNumber == inputMandatory) {
-    calculateScore(course, priorities, true);
-  } else {
-    calculateScore(course, priorities, false);
-  }
-}
-gpaArray.sort((a, b) => b.score - a.score);
+        for (var i = 0; i < gpaArray.length; i++) {
+          var course = gpaArray[i];
+          if (course.CourseNumber == inputMandatory) {
+            calculateScore(course, priorities, true);
+          } else {
+            calculateScore(course, priorities, false);
+          }
+        }
+        gpaArray.sort((a, b) => b.score - a.score);
 
-for (var i = 0; i < timingArray.length; i++) {
-  var course = timingArray[i];
-  if (course.CourseNumber == inputMandatory) {
-    calculateScore(course, priorities, true);
-  } else {
-    calculateScore(course, priorities, false);
-  }
-}
-timingArray.sort((a, b) => b.score - a.score);
+        for (var i = 0; i < timingArray.length; i++) {
+          var course = timingArray[i];
+          if (course.CourseNumber == inputMandatory) {
+            calculateScore(course, priorities, true);
+          } else {
+            calculateScore(course, priorities, false);
+          }
+        }
+        timingArray.sort((a, b) => b.score - a.score);
 
-var schedule = generateSchedule(
-  allowedCourses,
-  inputMinCredits,
-  inputMaxCredits
-);
+        var schedule = generateSchedule(
+          allowedCourses,
+          inputMinCredits,
+          inputMaxCredits
+        );
 
-var gpaSchedule = generateSchedule(gpaArray, inputMinCredits, inputMaxCredits);
+        var gpaSchedule = generateSchedule(gpaArray, inputMinCredits, inputMaxCredits);
 
-var timingSchedule = generateSchedule(
-  timingArray,
-  inputMinCredits,
-  inputMaxCredits
-);
+        var timingSchedule = generateSchedule(
+          timingArray,
+          inputMinCredits,
+          inputMaxCredits
+        );
 
         // this is abrar code
         var allSchedules = [schedule , gpaSchedule , timingSchedule];
-        response.json(courses);
+        console.log(courses);
+        response.json(allSchedules);
+        //response.json(courses);
     
     })
     .catch((error) => {
