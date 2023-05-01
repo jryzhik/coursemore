@@ -73,7 +73,7 @@ var inputs = ["GPA", "techSquare", "dayBlock", "hourBlock"];
 var priorities = inverseMapping(inputs);
 
 //console.log(courses);
-
+var myMap = new Map();
 var inputdayBlock = ["F"]; // M, T, W, R, F, blocks whole day.
 var inputhourBlock = [8, 9, 10, 11, 12]; //military, blocks entire hour.
 var inputMandatory = "1332";
@@ -182,11 +182,11 @@ function generateSchedule(courses, minCredits, maxCredits) {
         );
 
         if (
-          (classToAddStart <= existingClassEnd &&
-            classToAddEnd >= existingClassStart) ||
-          (existingClassStart <= classToAddEnd &&
-            existingClassEnd >= existingClassStart)
-        ) {
+              (classToAddStart.getTime() <= existingClassEnd.getTime() &&
+                classToAddEnd.getTime() >= existingClassStart.getTime()) ||
+              (existingClassStart.getTime() <= classToAddEnd.getTime() &&
+                existingClassEnd.getTime() >= classToAddStart.getTime())
+            ) {
           hasConflict = true;
           break;
         }
@@ -216,6 +216,8 @@ function generateSchedule(courses, minCredits, maxCredits) {
     // totalCredits: credits,
   };
 }
+
+
 
 // Prunes out classes that cannot be taken due to prerequesite dependency
 function prune(arr) {
@@ -341,6 +343,14 @@ function calculateScore(course, priori, bool) {
   }
   course.score = score;
   //console.log(course.score);
+
+  if(myMap.get(course.requirement) == 1){
+    course.score = course.score + 5;
+  }else if(myMap.get(course.requirement) == 2){
+    course.score = course.score + .75;
+  }else if(myMap.get(course.requirement) == 3){
+    course.score = course.score + .5;
+  }
 }
 
 // Convert array of string days to letter representations
@@ -477,6 +487,12 @@ getCourses(req)
         for(var i = 0 ; i < x.length ; i++){
           for(var j = 0 ; j < x[i].length ; j++){
             x[i][j].requirement = i;
+            if (myMap.has(x[i][j].requirement)) {
+              let oldValue = myMap.get(x[i][j].requirement);
+              myMap.set(x[i][j].requirement, oldValue + 1);
+            } else {
+              myMap.set(x[i][j].requirement, 1);
+            }
           }
         }
 
@@ -522,9 +538,9 @@ getCourses(req)
         for (var i = 0; i < gpaArray.length; i++) {
           var course = gpaArray[i];
           if (course.CourseNumber == inputMandatory) {
-            calculateScore(course, priorities, true);
+            calculateScore(course, gpaPriority, true);
           } else {
-            calculateScore(course, priorities, false);
+            calculateScore(course, gpaPriority, false);
           }
         }
         gpaArray.sort((a, b) => b.score - a.score);
@@ -532,9 +548,9 @@ getCourses(req)
         for (var i = 0; i < timingArray.length; i++) {
           var course = timingArray[i];
           if (course.CourseNumber == inputMandatory) {
-            calculateScore(course, priorities, true);
+            calculateScore(course, timingPriority, true);
           } else {
-            calculateScore(course, priorities, false);
+            calculateScore(course, timingPriority, false);
           }
         }
         timingArray.sort((a, b) => b.score - a.score);
@@ -555,7 +571,7 @@ getCourses(req)
 
         // this is abrar code
         var allSchedules = [schedule , gpaSchedule , timingSchedule];
-        console.log(courses);
+        //console.log(courses);
         response.json(allSchedules);
         //response.json(courses);
     
