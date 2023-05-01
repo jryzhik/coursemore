@@ -16,6 +16,7 @@ import ArrowNext from '../img/arrow_next.svg'
 import { Box } from '@mui/system'
 import Divider from '@mui/material/Divider';
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios';
 
 const coursesList = [
     {
@@ -66,10 +67,11 @@ function Rank() {
     });
     useEffect(() => {
         if (parametersFiltered.length === 1 || parametersFiltered.length === 0) {
-          console.log("take me to nextpage");
-          navigate('/results', { state: parameters });
+            console.log("take me to nextpage");
+
+            navigate('/results', { state: parameters });
         }
-      }, []);
+    }, []);
 
     const [courses, updateCourses] = useState(parametersFiltered);
     function handleOnDragEnd(result) {
@@ -89,7 +91,7 @@ function Rank() {
         })
         parameters['ranking'] = newArr
         console.log("Final Object", parameters)
-          navigate('/results', { state: parameters });
+        navigate('/results', { state: parameters });
     };
     return (
         <ThemeProvider theme={MainTheme}>

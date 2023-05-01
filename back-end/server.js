@@ -2,6 +2,7 @@ const db = require("./db/conn");
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser')
 
 
 require('dotenv').config();
@@ -10,7 +11,9 @@ const app = express();
 const port = process.env.PORT || 5050; // was || 5001
 
 app.use(cors());
-app.use(express.json());
+// app.use(express.json());
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded(({ extended:false})))
 
 
 const usersRouter = require('./routes/users');
@@ -21,7 +24,7 @@ const scheduleRoutes = require('./routes/schedule');
 //All routers (middleware) will be placed here
 
 app.get('/', function (req, res) {
-    res.send('hello');
+    res.send(req);
 })
 
 app.get('/hello', function (req, res) {

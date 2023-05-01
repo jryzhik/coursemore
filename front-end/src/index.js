@@ -6,6 +6,7 @@ import Filter from "./pages/Filter";
 import "./index.css";
 import Rank from "./pages/Rank";
 import Results from "./pages/Results";
+import Test from "./pages/Test";
 
 
 
@@ -25,6 +26,10 @@ const router  = createBrowserRouter([
   {
     path: "results",
     element: <Results/>
+  },
+  {
+    path: "test",
+    element: <Test/>
   }
 ]);
 

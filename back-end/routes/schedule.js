@@ -1,5 +1,9 @@
 const express = require("express");
- 
+var bodyParser = require('body-parser')
+
+var jsonParser = bodyParser.json()
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
 // recordRoutes is an instance of the express router.
 // We use it to define our routes.
 // The router will be added as a middleware and will take control of requests starting with path /record.
@@ -587,11 +591,15 @@ getCourses(req)
 });
 
 
-//This is to test if postman woks
-scheduleRoutes.route("/test").get(function (req, res) {
-  res.send('Hello from Express!');
-});
+// //This is to test if postman woks
+// scheduleRoutes.route("/test").get(urlencodedParser,jsonParser, function (req, res) {
+//   // res.send('Hello from Express!');
+//   res.send(req.body)
+// });
 
+scheduleRoutes.get('/test', jsonParser, function (req, res) {
+    res.send(req)
+})
 
 
 module.exports = scheduleRoutes;
