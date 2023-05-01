@@ -137,6 +137,16 @@ var timingArray = JSON.parse(JSON.stringify(allowedCourses));
 // console.log(schedule);
 // console.log(gpaSchedule);
 // console.log(timingSchedule);
+function compareArrays(arr1, arr2) {
+  for (let i = 0; i < arr1.length; i++) {
+    for (let j = 0; j < arr2.length; j++) {
+      if (arr1[i] === arr2[j]) {
+        return 1;
+      }
+    }
+  }
+  return 0;
+}
 
 function generateSchedule(courses, minCredits, maxCredits) {
   let credits = 0;
@@ -180,16 +190,26 @@ function generateSchedule(courses, minCredits, maxCredits) {
           existingClass.HourEnd,
           existingClass.MinuteEnd
         );
-
-        if (
+        if(compareArrays(course.Days.split("") , existingClass.Days.split("")) == 1){
+          if (
               (classToAddStart.getTime() <= existingClassEnd.getTime() &&
                 classToAddEnd.getTime() >= existingClassStart.getTime()) ||
               (existingClassStart.getTime() <= classToAddEnd.getTime() &&
                 existingClassEnd.getTime() >= classToAddStart.getTime())
             ) {
-          hasConflict = true;
-          break;
+              hasConflict = true;
+              break;
+              }
         }
+        // if (
+        //       (classToAddStart.getTime() <= existingClassEnd.getTime() &&
+        //         classToAddEnd.getTime() >= existingClassStart.getTime()) ||
+        //       (existingClassStart.getTime() <= classToAddEnd.getTime() &&
+        //         existingClassEnd.getTime() >= classToAddStart.getTime())
+        //     ) {
+        //   hasConflict = true;
+        //   break;
+        // }
       }
      //hasConflict = false;
       if (hasConflict) {
