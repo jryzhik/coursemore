@@ -471,7 +471,7 @@ return Promise.all(promises)
   //res.json(temp);
 }
 
-scheduleRoutes.route("/getSchedule").get(function (req, response) {
+scheduleRoutes.route("/getSchedule").post(function (req, response) {
  let db_connect = dbo.getDb("coursemore");
  const temp = getCourses(req);
 getCourses(req)

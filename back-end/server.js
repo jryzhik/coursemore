@@ -1,12 +1,16 @@
 const db = require("./db/conn");
 const express = require('express');
-const mongoose = require('mongoose'); 
+const cors = require('cors');
+const mongoose = require('mongoose');
+
 
 require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 5050; // was || 5001
 
+app.use(cors());
+app.use(express.json());
 
 
 const usersRouter = require('./routes/users');
@@ -31,6 +35,7 @@ app.use("/courses" , coursesRouter);
 app.use("/instructors" , instructorsRoutes);
 app.use("/schedule" , scheduleRoutes);
 app.use("/upload" , uploadRouter);
+
 
 
 app.listen(port, () => {

@@ -16,6 +16,7 @@ import ArrowNext from '../img/arrow_next.svg'
 import { Box } from '@mui/system'
 import Divider from '@mui/material/Divider';
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios';
 
 const coursesList = [
     {
@@ -46,7 +47,7 @@ function Rank() {
     // Get info from filter page
     const location = useLocation()
     const parameters = location.state
-    console.log("passed down filter page", parameters)
+    // console.log("passed down filter page", parameters)
     const navigate = useNavigate();
 
     const parametersFiltered = coursesList.filter(object_element => {
@@ -65,12 +66,10 @@ function Rank() {
         }
     });
     useEffect(() => {
-        if (parametersFiltered.length === 1 || parametersFiltered.length === 0) {
-          console.log("take me to nextpage");
-          navigate('/results', { state: parameters });
-        }
-      }, []);
-
+        console.log("OBJECT", parameters)
+        
+    }, []);
+    
     const [courses, updateCourses] = useState(parametersFiltered);
     function handleOnDragEnd(result) {
         if (!result.destination) return;
@@ -80,17 +79,42 @@ function Rank() {
         items.splice(result.destination.index, 0, reorderedItem);
 
         updateCourses(items);
+        console.log("Updated", parameters)
     }
 
+
     function nextHandle() {
-        const newArr = []
+        const newArr = [];
         courses.forEach((element) => {
-            newArr.push(element.id)
-        })
-        parameters['ranking'] = newArr
-        console.log("Final Object", parameters)
-          navigate('/results', { state: parameters });
+            newArr.push(element.id);
+        });
+
+        parameters['ranking'] = newArr;
+
+        const data = {
+            dayBlock: parameters.dayBlock,
+            degreeWorksCourses: parameters.degreeWorksCourses,
+            hourBlock: parameters.hourBlock,
+            mandatoryCourse: parameters.mandatoryCourse,
+            maxCredits: parameters.maxCredits,
+            minCredits: parameters.minCredits,
+            profGPA: parameters.profGPA,
+            ranking: parameters.ranking,
+            techSquare: parameters.techSquare,
+        };
+
+        const apiUrl = 'http://localhost:5050/schedule/getSchedule';
+
+        axios.post(apiUrl, data)
+            .then(response => {
+                console.log('Response:', response.data);
+                navigate('/results', { state: response.data });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     };
+
     return (
         <ThemeProvider theme={MainTheme}>
             <Header />

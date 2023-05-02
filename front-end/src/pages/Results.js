@@ -26,7 +26,12 @@ function Results() {
                 <Grid paddingLeft={20}>
                     <Typography variant='h1'>Here is your <Typography variant='h1emph'>optimized</Typography> schedules :) </Typography>
                 </Grid>
-
+                <h1>schedule 1</h1>
+                <h2>{JSON.stringify(parameters[0])}</h2>
+                <h1>schedule 2</h1>
+                <h2>{JSON.stringify(parameters[1])}</h2>
+                <h1>schedule 3</h1>
+                <h2>{JSON.stringify(parameters[2])}</h2>
                 <Grid padding={3} align={"center"}>
                     <Footer />
                 </Grid>
