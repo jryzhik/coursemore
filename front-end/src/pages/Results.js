@@ -30,21 +30,21 @@ function Results() {
                 </Grid>
 
                 <Stack direction="row" spacing={3}>
-                <Typography variant='h1emph'>schedule 1</Typography>
+                <Typography variant='h1emph'>Input Schedule</Typography>
                 {parameters[0].schedule.map((course) => (
                     <Calendar key={course._id}schedule={course}/>
 
                 ))}
                 </Stack>
                 <Stack direction="row" spacing={3}>
-                <Typography variant='h1emph'>schedule 2</Typography>
+                <Typography variant='h1emph'>GPA Schedule</Typography>
                 {parameters[1].schedule.map((course) => (
                     <Calendar key={course._id}schedule={course}/>
 
                 ))}
                 </Stack>
                 <Stack direction="row" spacing={3}>
-                <Typography variant='h1emph'>schedule 3</Typography>
+                <Typography variant='h1emph'>Timing Schedule</Typography>
                 {parameters[2].schedule.map((course) => (
                     <Calendar key={course._id}schedule={course}/>
 
