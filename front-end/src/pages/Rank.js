@@ -67,49 +67,9 @@ function Rank() {
     });
     useEffect(() => {
         console.log("OBJECT", parameters)
-        // if (parametersFiltered.length === 1 || parametersFiltered.length === 0) {
-        //     console.log("take me to nextpage");
-        //     navigate('/results', { state: parameters });
-        // }
-        const apiUrl = 'http://localhost:5050/schedule/getSchedule';
-
-            // const data = {
-            //     dayBlock: 'TW',
-            //     degreeWorksCourses: [['4460'], ['2050', '2051'], ['1332'], ['2340'], ['3001', '4001', '4002', '4003', '4726'], ['2110']],
-            //     hourBlock: {
-            //         start: '11',
-            //         end: '13',
-            //     },
-            //     mandatoryCourse: '3510',
-            //     maxCredits: '18',
-            //     minCredits: '12',
-            //     profGPA: null,
-            //     ranking: ['techSquare', 'hourBlock', 'dayBlock'],
-            //     techSquare: true,
-            // };
-            const data = {
-                dayBlock: parameters.dayBlock,
-                degreeWorksCourses: parameters.degreeWorksCourses,
-                hourBlock: parameters.hourBlock,
-                mandatoryCourse: parameters.mandatoryCourse,
-                maxCredits: parameters.maxCredits,
-                minCredits: parameters.minCredits,
-                profGPA: parameters.profGPA,
-                ranking: parameters.ranking,
-                techSquare: parameters.techSquare,
-            };
-
-            axios.post(apiUrl, data)
-                .then(response => {
-                    console.log('Response:', response.data);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-                navigate('/results', { state: parameters });
-
+        
     }, []);
-
+    
     const [courses, updateCourses] = useState(parametersFiltered);
     function handleOnDragEnd(result) {
         if (!result.destination) return;
@@ -119,17 +79,42 @@ function Rank() {
         items.splice(result.destination.index, 0, reorderedItem);
 
         updateCourses(items);
+        console.log("Updated", parameters)
     }
 
+
     function nextHandle() {
-        const newArr = []
+        const newArr = [];
         courses.forEach((element) => {
-            newArr.push(element.id)
-        })
-        parameters['ranking'] = newArr
-        console.log("Final Object", parameters)
-        navigate('/results', { state: parameters });
+            newArr.push(element.id);
+        });
+
+        parameters['ranking'] = newArr;
+
+        const data = {
+            dayBlock: parameters.dayBlock,
+            degreeWorksCourses: parameters.degreeWorksCourses,
+            hourBlock: parameters.hourBlock,
+            mandatoryCourse: parameters.mandatoryCourse,
+            maxCredits: parameters.maxCredits,
+            minCredits: parameters.minCredits,
+            profGPA: parameters.profGPA,
+            ranking: parameters.ranking,
+            techSquare: parameters.techSquare,
+        };
+
+        const apiUrl = 'http://localhost:5050/schedule/getSchedule';
+
+        axios.post(apiUrl, data)
+            .then(response => {
+                console.log('Response:', response.data);
+                navigate('/results', { state: response.data });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     };
+
     return (
         <ThemeProvider theme={MainTheme}>
             <Header />
