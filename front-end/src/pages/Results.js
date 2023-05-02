@@ -6,13 +6,15 @@ import Header from '../components/Header';
 import Grid from '@mui/material/Grid';
 import Footer from '../components/Footer';
 import { useLocation } from 'react-router-dom'
+import Calendar from '../components/Calendar';
+import Stack from '@mui/joy/Stack';
+
 
 
 function Results() {
     const location = useLocation()
     const parameters = location.state
     console.log("Results from ranking algorithm", parameters)
-   
 
     return (
         <ThemeProvider theme={MainTheme}>
@@ -26,12 +28,28 @@ function Results() {
                 <Grid paddingLeft={20}>
                     <Typography variant='h1'>Here is your <Typography variant='h1emph'>optimized</Typography> schedules :) </Typography>
                 </Grid>
-                <h1>schedule 1</h1>
-                <h2>{JSON.stringify(parameters[0])}</h2>
-                <h1>schedule 2</h1>
-                <h2>{JSON.stringify(parameters[1])}</h2>
-                <h1>schedule 3</h1>
-                <h2>{JSON.stringify(parameters[2])}</h2>
+
+                <Stack direction="row" spacing={3}>
+                <Typography variant='h1emph'>schedule 1</Typography>
+                {parameters[0].schedule.map((course) => (
+                    <Calendar key={course._id}schedule={course}/>
+
+                ))}
+                </Stack>
+                <Stack direction="row" spacing={3}>
+                <Typography variant='h1emph'>schedule 2</Typography>
+                {parameters[1].schedule.map((course) => (
+                    <Calendar key={course._id}schedule={course}/>
+
+                ))}
+                </Stack>
+                <Stack direction="row" spacing={3}>
+                <Typography variant='h1emph'>schedule 3</Typography>
+                {parameters[2].schedule.map((course) => (
+                    <Calendar key={course._id}schedule={course}/>
+
+                ))}
+                </Stack>
                 <Grid padding={3} align={"center"}>
                     <Footer />
                 </Grid>
