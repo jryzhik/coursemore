@@ -18,7 +18,7 @@ export default function Calendar(props) {
           {schedule.CourseTitle}
         </Typography>
         <Typography variant="h5" component="div">
-          CS {schedule.CRN} &nbsp; | &nbsp;{schedule.Section}
+          CS {schedule.CourseNumber} &nbsp; | &nbsp;{schedule.Section}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           {schedule.InstructorName} GPA: {schedule.GPA}
@@ -29,6 +29,8 @@ export default function Calendar(props) {
             Day: {schedule.Days}
         <br />
             {schedule.Location}
+            <br />
+            CRN: {schedule.CRN}
         </Typography>
       </CardContent>
       {/* <CardActions>
