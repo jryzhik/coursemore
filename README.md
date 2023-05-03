@@ -57,3 +57,10 @@ https://www.figma.com/file/LTBjmbi02y4R7yEKTLsATf/coursemore?node-id=0%3A1&t=vct
 
 ### CODE CITATION
     Upload module tutorial https://www.youtube.com/watch?v=dbYBVbrDnwg&t=1815s
+
+### Programming Languages and Versions
+    python3
+    react.js "^18.2.0",
+    javascript
+    node v16.19.1
+    
